@@ -69,15 +69,9 @@
 		04B69F0428BE7B8E00430E72 /* kode-practice */ = {
 			isa = PBXGroup;
 			children = (
-				04B69F0528BE7B8E00430E72 /* AppDelegate.swift */,
-				04B69F0928BE7B8E00430E72 /* ViewController.swift */,
-				04BD926C28BEB960009BCAC6 /* UIColor+Hex.swift */,
-				04BD926A28BEB8D2009BCAC6 /* Resources.swift */,
-				04B69F0E28BE7B9000430E72 /* Assets.xcassets */,
-				04B69F2428BEA2FE00430E72 /* LaunchScreen.storyboard */,
-				04B69F1E28BEA24F00430E72 /* Localizable.strings */,
+				04BD927328BEBBCE009BCAC6 /* Sources */,
+				04BD927128BEBB9E009BCAC6 /* Resources */,
 				04B69F3028BEB7ED00430E72 /* Info.plist */,
-				04B69F2728BEB7D800430E72 /* Fonts */,
 			);
 			path = "kode-practice";
 			sourceTree = "<group>";
@@ -91,6 +85,60 @@
 				04B69F2B28BEB7D800430E72 /* Inter-SemiBold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		04BD926E28BEBB77009BCAC6 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				04BD927228BEBBAE009BCAC6 /* Application */,
+				04BD927028BEBB92009BCAC6 /* Extensions */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		04BD926F28BEBB81009BCAC6 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				04B69F0928BE7B8E00430E72 /* ViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		04BD927028BEBB92009BCAC6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04BD926C28BEB960009BCAC6 /* UIColor+Hex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		04BD927128BEBB9E009BCAC6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				04BD926A28BEB8D2009BCAC6 /* Resources.swift */,
+				04B69F0E28BE7B9000430E72 /* Assets.xcassets */,
+				04B69F2428BEA2FE00430E72 /* LaunchScreen.storyboard */,
+				04B69F1E28BEA24F00430E72 /* Localizable.strings */,
+				04B69F2728BEB7D800430E72 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		04BD927228BEBBAE009BCAC6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				04B69F0528BE7B8E00430E72 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		04BD927328BEBBCE009BCAC6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				04BD926F28BEBB81009BCAC6 /* Modules */,
+				04BD926E28BEBB77009BCAC6 /* Supporting */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
