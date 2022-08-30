@@ -20,6 +20,28 @@ enum Resources {
         }
     }
     
+    enum Colors {
+        static let activePrimary = UIColor(hex: "#6534FF") ?? .systemGreen
+        static let separator = UIColor(hex: "#C3C3C6") ?? .systemGreen
+        static let networkError = UIColor(hex: "#F44336") ?? .systemGreen
+        static let detailsBackground = UIColor(hex: "#F7F7F8") ?? .systemGreen
+        enum Gradient {
+            static let loadingSkeletonStart = UIColor(hex: "#F3F3F6") ?? .systemGreen
+            static let loadingSkeletonEnd = UIColor(hex: "#FAFAFA") ?? .systemGreen
+        }
+        
+        enum SearchBar {
+            static let secondary = UIColor(hex: "#F7F7F8") ?? .systemGreen
+            static let placeholder = UIColor(hex: "#C3C3C6") ?? .systemGreen
+        }
+        
+        enum Text {
+            static let active = UIColor(hex: "#050510") ?? .systemGreen
+            static let inActive = UIColor(hex: "#97979B") ?? .systemGreen
+            static let secondary = UIColor(hex: "#55555C") ?? .systemGreen
+        }
+    }
+    
     enum Fonts {
         static func interMedium(with size: CGFloat) -> UIFont {
             UIFont(name: "Inter-Medium", size: size) ?? UIFont()
