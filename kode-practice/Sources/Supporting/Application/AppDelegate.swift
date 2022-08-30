@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     
     func configureWindow() {
-        let rootViewController = ViewController()
+        let rootViewController = MainViewController()
         
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.overrideUserInterfaceStyle = .light

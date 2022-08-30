@@ -132,4 +132,10 @@ enum Resources {
         case ufo = "\u{1F6F8}"
         case magnifyingGlass = "\u{1F50D}"
     }
+    
+    enum Keys {
+        enum NSObjectValue: String {
+            case cancelButtonText = "cancelButtonText"
+        }
+    }
 }
