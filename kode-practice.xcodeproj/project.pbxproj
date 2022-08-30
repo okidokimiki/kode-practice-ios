@@ -12,6 +12,11 @@
 		04B69F0F28BE7B9000430E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F0E28BE7B9000430E72 /* Assets.xcassets */; };
 		04B69F1C28BEA24F00430E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F1E28BEA24F00430E72 /* Localizable.strings */; };
 		04B69F2228BEA2FE00430E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F2428BEA2FE00430E72 /* LaunchScreen.storyboard */; };
+		04B69F2C28BEB7D800430E72 /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F2828BEB7D800430E72 /* Inter-Regular.otf */; };
+		04B69F2D28BEB7D800430E72 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F2928BEB7D800430E72 /* Inter-Bold.ttf */; };
+		04B69F2E28BEB7D800430E72 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F2A28BEB7D800430E72 /* Inter-Medium.otf */; };
+		04B69F2F28BEB7D800430E72 /* Inter-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F2B28BEB7D800430E72 /* Inter-SemiBold.otf */; };
+		04B69F3128BEB7ED00430E72 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B69F3028BEB7ED00430E72 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,11 +24,15 @@
 		04B69F0528BE7B8E00430E72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B69F0928BE7B8E00430E72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		04B69F0E28BE7B9000430E72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		04B69F1328BE7B9000430E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04B69F1D28BEA24F00430E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04B69F1F28BEA25100430E72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04B69F2328BEA2FE00430E72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04B69F2628BEA30100430E72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		04B69F2828BEB7D800430E72 /* Inter-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.otf"; sourceTree = "<group>"; };
+		04B69F2928BEB7D800430E72 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		04B69F2A28BEB7D800430E72 /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
+		04B69F2B28BEB7D800430E72 /* Inter-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.otf"; sourceTree = "<group>"; };
+		04B69F3028BEB7ED00430E72 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +70,21 @@
 				04B69F0E28BE7B9000430E72 /* Assets.xcassets */,
 				04B69F2428BEA2FE00430E72 /* LaunchScreen.storyboard */,
 				04B69F1E28BEA24F00430E72 /* Localizable.strings */,
-				04B69F1328BE7B9000430E72 /* Info.plist */,
+				04B69F3028BEB7ED00430E72 /* Info.plist */,
+				04B69F2728BEB7D800430E72 /* Fonts */,
 			);
 			path = "kode-practice";
+			sourceTree = "<group>";
+		};
+		04B69F2728BEB7D800430E72 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04B69F2828BEB7D800430E72 /* Inter-Regular.otf */,
+				04B69F2928BEB7D800430E72 /* Inter-Bold.ttf */,
+				04B69F2A28BEB7D800430E72 /* Inter-Medium.otf */,
+				04B69F2B28BEB7D800430E72 /* Inter-SemiBold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +146,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B69F3128BEB7ED00430E72 /* Info.plist in Resources */,
 				04B69F2228BEA2FE00430E72 /* LaunchScreen.storyboard in Resources */,
+				04B69F2F28BEB7D800430E72 /* Inter-SemiBold.otf in Resources */,
+				04B69F2E28BEB7D800430E72 /* Inter-Medium.otf in Resources */,
+				04B69F2D28BEB7D800430E72 /* Inter-Bold.ttf in Resources */,
+				04B69F2C28BEB7D800430E72 /* Inter-Regular.otf in Resources */,
 				04B69F1C28BEA24F00430E72 /* Localizable.strings in Resources */,
 				04B69F0F28BE7B9000430E72 /* Assets.xcassets in Resources */,
 			);
