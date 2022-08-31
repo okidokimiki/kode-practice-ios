@@ -99,6 +99,17 @@ final class UserTableViewCell: UITableViewCell {
     
     // MARK: - ConfigurePerCell
     
+    override func prepareForReuse() {
+        avatarImageView.image = nil
+    }
+        
+    func configure(with model: UserTableViewCellModel) {
+        avatarImageView.loadImage(from: model.logoUrl)
+        departmentLabel.text = model.department.title
+        fullNameLabel.text = model.fullName
+        tagLabel.text = model.userTag
+    }
+    
     func shouldSkeletonViewsHide(_ shouldHide: Bool) {
         [skeletonAvatarView, skeletonFullNameView, skeletonDepartmentView].forEach { $0.isHidden = shouldHide }
     }

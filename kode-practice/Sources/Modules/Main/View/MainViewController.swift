@@ -26,19 +26,16 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTargets()
+        setupBindings()
         setupDelegates()
         
         viewModel?.getTabs()
+        viewModel?.getUsers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupSelectedTab()
     }
 }
 
@@ -66,6 +63,7 @@ extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel?.saveLastUsedTab(indexPath.item)
+        viewModel?.getDepartmentUsers(of: Department.allCases[indexPath.item])
     }
 }
 
@@ -130,12 +128,19 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Constants.skeletonTableViewCellCount
+        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else {
+            return Constants.skeletonTableViewCellCount
+        }
+        
+        return viewModel.departmentUsers.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let userCell = tableView.dequeueCell(cellType: UserTableViewCell.self)
-        userCell.shouldSkeletonViewsHide(false)
+        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
+        
+        userCell.shouldSkeletonViewsHide(true)
+        userCell.configure(with: viewModel.departmentUsers.value[indexPath.row])
         
         return userCell
     }
@@ -150,6 +155,7 @@ private extension MainViewController {
     }
     
     func setupTargets() {
+        selfView.refreshControl.addTarget(self, action: #selector(refreshControlDidScroll), for: .valueChanged)
         selfView.searchBar.searchTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
     }
     
@@ -168,6 +174,22 @@ private extension MainViewController {
         
         selfView.tabsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
+    
+    func setupBindings() {
+        viewModel?.users.observe { _ in
+            DispatchQueue.main.async {
+                self.viewModel?.getDepartmentUsers(of: Department.allCases[self.viewModel?.selectedTabNumber ?? .zero])
+            }
+        }
+        
+        viewModel?.departmentUsers.observe { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.selfView.refreshControl.endRefreshing()
+                self?.selfView.userTableView.reloadData()
+                self?.setupSelectedTab()
+            }
+        }
+    }
 }
 
 // MARK: - Actions
@@ -178,5 +200,9 @@ private extension MainViewController {
     func textChanged(_ sender: UITextField) {
         let image = sender.text?.count == .zero ? R.Images.SearchBar.leftImageNormal : R.Images.SearchBar.leftImageSelected
         sender.leftView = UIImageView.init(image: image)
+    }
+    
+    func refreshControlDidScroll(_ refreshControl: UIRefreshControl) {
+        viewModel?.getUsers()
     }
 }
