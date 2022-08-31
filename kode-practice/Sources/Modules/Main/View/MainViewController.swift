@@ -17,6 +17,10 @@ final class MainViewController: BaseViewController<MainView> {
     private lazy var noInternetView = NoInternetView()
     private lazy var filterViewController = FilterViewController()
     
+    // MARK: - Gestures
+    
+    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(noInternerViewDidTap))
+    
     // MARK: - Internal Properties
     
     private var viewModel: MainViewModel?
@@ -36,6 +40,7 @@ final class MainViewController: BaseViewController<MainView> {
         setupBindings()
         setupDelegates()
         setupNoInternetView()
+        setupGestureRecognizerDelegates()
         
         subscribeToNotifications()
         
@@ -46,6 +51,15 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    
+    func setupGestureRecognizerDelegates() {
+        noInternetTapGesture.delegate = self
     }
 }
 
@@ -266,6 +280,8 @@ private extension MainViewController {
     }
     
     func setupNoInternetView() {
+        noInternetView.addGestureRecognizer(noInternetTapGesture)
+        
         navigationController?.view.addSubview(noInternetView)
         noInternetView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -379,5 +395,9 @@ private extension MainViewController {
         } else {
             viewModel?.networkState.value = .failed(.noInternet)
         }
+    }
+    
+    func noInternerViewDidTap(_ sender: UITapGestureRecognizer) {
+        shouldNoInternetViewBePresented(false)
     }
 }
