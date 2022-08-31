@@ -9,11 +9,17 @@ final class MainViewController: BaseViewController<MainView> {
         static let skeletonTableViewCellCount: Int = 12
         static let rowCellHeight: CGFloat = 84
         static let headerViewHeight: CGFloat = 68
+        static let noInternetInitialHeight: CGFloat = 0
     }
     
     // MARK: - Views
     
+    private lazy var noInternetView = NoInternetView()
     private lazy var filterViewController = FilterViewController()
+    
+    // MARK: - Gestures
+    
+    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(noInternerViewDidTap))
     
     // MARK: - Internal Properties
     
@@ -33,6 +39,10 @@ final class MainViewController: BaseViewController<MainView> {
         setupTargets()
         setupBindings()
         setupDelegates()
+        setupNoInternetView()
+        setupGestureRecognizerDelegates()
+        
+        subscribeToNotifications()
         
         viewModel?.getTabs()
         viewModel?.getUsers()
@@ -41,6 +51,15 @@ final class MainViewController: BaseViewController<MainView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    
+    func setupGestureRecognizerDelegates() {
+        noInternetTapGesture.delegate = self
     }
 }
 
@@ -260,6 +279,16 @@ private extension MainViewController {
         selfView.userTableView.dataSource = self
     }
     
+    func setupNoInternetView() {
+        noInternetView.addGestureRecognizer(noInternetTapGesture)
+        
+        navigationController?.view.addSubview(noInternetView)
+        noInternetView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(Constants.noInternetInitialHeight)
+        }
+    }
+    
     func setupSelectedTab() {
         guard let viewModel = viewModel else { return }
         let indexPath = IndexPath(item: viewModel.selectedTabNumber, section: .zero)
@@ -297,6 +326,52 @@ private extension MainViewController {
                 }
             }
         }
+        
+        viewModel?.networkState.observe { [weak self] state in
+            DispatchQueue.main.async {
+                if case let .failed(failureReason) = state {
+                    switch failureReason {
+                    case .internalServerError(let internalError):
+                        // handle in internalError
+                        print(internalError)
+                    case .noInternet:
+                        self?.shouldNoInternetViewBePresented(true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func shouldNoInternetViewBePresented(_ shouldPresenet: Bool) {
+        var topBarHeight: CGFloat {
+            var top = self.navigationController?.navigationBar.frame.height ?? .zero
+            top += UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? .zero
+            
+            return top
+        }
+        
+        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? topBarHeight : .zero) }
+        
+        noInternetView.setNeedsUpdateConstraints()
+        UIView.animate(withDuration: 0.5) { self.noInternetView.layoutIfNeeded() } completion: { done in
+            if done {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    guard self.noInternetView.frame.height != topBarHeight else {
+                        self.shouldNoInternetViewBePresented(false)
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func subscribeToNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(connectivityStatusChanged),
+            name: NSNotification.Name.connectivityStatus,
+            object: nil
+        )
     }
 }
 
@@ -312,5 +387,17 @@ private extension MainViewController {
     
     func refreshControlDidScroll(_ refreshControl: UIRefreshControl) {
         viewModel?.getUsers()
+    }
+    
+    func connectivityStatusChanged(_ notification: Notification) {
+        if NetworkMonitor.shared.isConnected {
+            viewModel?.networkState.value = .default
+        } else {
+            viewModel?.networkState.value = .failed(.noInternet)
+        }
+    }
+    
+    func noInternerViewDidTap(_ sender: UITapGestureRecognizer) {
+        shouldNoInternetViewBePresented(false)
     }
 }
