@@ -62,6 +62,7 @@
 		04BD92E928BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92E828BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift */; };
 		04BD92EB28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */; };
 		04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */; };
+		04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		04BD92E828BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCellModel.swift; sourceTree = "<group>"; };
 		04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoTableViewCellModel.swift; sourceTree = "<group>"; };
 		04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+WordAge.swift"; sourceTree = "<group>"; };
+		04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButtonItem.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				04BD92D828BF6AED009BCAC6 /* DetailsViewController.swift */,
 				04BD92DA28BF6B14009BCAC6 /* DetailsView.swift */,
 				04BD92DC28BF6B2D009BCAC6 /* InfoTableView.swift */,
+				04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				04BD92AE28BF47B8009BCAC6 /* EmptyModel.swift in Sources */,
 				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
 				04BD92C328BF5B90009BCAC6 /* UserHeaderView.swift in Sources */,
+				04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
 				04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */,
 				04BD92DB28BF6B14009BCAC6 /* DetailsView.swift in Sources */,

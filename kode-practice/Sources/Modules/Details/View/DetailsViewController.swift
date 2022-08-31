@@ -8,6 +8,10 @@ final class DetailsViewController: BaseViewController<DetailsView> {
         static let rowCellHeight: CGFloat = 60
     }
     
+    // MARK: - Views
+    
+    lazy var backBarButton = BackBarButtonItem(target: navigationController ?? UINavigationController())
+    
     // MARK: - Internal Properties
     
     private var viewModel: DetailsViewModel?
@@ -28,6 +32,11 @@ final class DetailsViewController: BaseViewController<DetailsView> {
         setupBindings()
         
         selfView.configure(with: viewModel?.user)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
     }
 }
 
@@ -74,6 +83,10 @@ extension DetailsViewController: UITableViewDataSource {
 // MARK: - Private Methods
 
 private extension DetailsViewController {
+    
+    func configureNavigationBar() {
+        navigationItem.leftBarButtonItem = backBarButton
+    }
     
     func setupDelegates() {
         selfView.infoTableView.delegate = self
