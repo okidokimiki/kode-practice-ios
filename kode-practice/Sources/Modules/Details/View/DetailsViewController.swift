@@ -24,6 +24,10 @@ final class DetailsViewController: BaseViewController<DetailsView> {
         self.selfView.configure(with: viewModel.user)
     }
     
+    deinit {
+        self.swipeToPop(enable: false)
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -37,6 +41,26 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.swipeToPop(enable: true)
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension DetailsViewController: UIGestureRecognizerDelegate {
+    
+    func swipeToPop(enable: Bool) {
+        if enable && (navigationController?.viewControllers.count ?? .zero > .one) {
+            navigationController?.interactivePopGestureRecognizer?.delegate = self
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        } else {
+            navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        }
     }
 }
 
