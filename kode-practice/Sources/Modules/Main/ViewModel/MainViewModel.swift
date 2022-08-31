@@ -1,9 +1,10 @@
 /*
  users --
      departamentUsers --
-        filteredByAlphabetUsers
-        filteredByHappyBirthdayThisYearUsers
-        filteredByHappyBirthdayNextYearUsers
+         searchedUsers --
+             filteredByAlphabetUsers
+             filteredByHappyBirthdayThisYearUsers
+             filteredByHappyBirthdayNextYearUsers
  */
 
 import Foundation
@@ -14,11 +15,13 @@ struct MainViewModel {
     
     var tabs: Observable<[TabCollectionViewCellModel]> = Observable([])
     
+    var searchState: Observable<SearchState> = Observable(.default)
     var filteredBy: Observable<FilterType> = Observable(.byAlphabet)
     var networkState: Observable<NetworkState> = Observable(.default)
     
     var users: Observable<[UserTableViewCellModel]> = Observable([])
     var departmentUsers: Observable<[UserTableViewCellModel]> = Observable([])
+    var searchedUsers: Observable<[UserTableViewCellModel]> = Observable([])
     
     // MARK: - Computed Properties
     
@@ -27,17 +30,17 @@ struct MainViewModel {
     }
     
     var filteredByAlphabetUsers: [UserTableViewCellModel] {
-        departmentUsers.value.sorted { $0.fullName < $1.fullName }
+        searchedUsers.value.sorted { $0.fullName < $1.fullName }
     }
     
     var filteredByHappyBirthdayThisYearUsers: [UserTableViewCellModel] {
-        departmentUsers.value
+        searchedUsers.value
             .filter { daysBetweenNow(and: $0.birthdayDate) > .zero }
             .sorted(by: { Date.MonthDay(date: $0.birthdayDate) < Date.MonthDay(date: $1.birthdayDate) })
     }
     
     var filteredByHappyBirthdayNextYearUsers: [UserTableViewCellModel] {
-        departmentUsers.value
+        searchedUsers.value
             .filter { daysBetweenNow(and: $0.birthdayDate) < .zero }
             .sorted(by: { Date.MonthDay(date: $0.birthdayDate) < Date.MonthDay(date: $1.birthdayDate) })
     }
@@ -72,6 +75,22 @@ struct MainViewModel {
         }
     }
     
+    func getSearchedUsers(by text: String = "") {
+        let sanitizedText = text
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
+        
+        if sanitizedText.isEmpty {
+            searchedUsers.value = departmentUsers.value
+            searchState.value = .default
+        } else {
+            searchedUsers.value = departmentUsers.value.filter {
+                $0.fullName.lowercased().contains(sanitizedText) || $0.userTag.lowercased().contains(sanitizedText)
+            }
+            searchState.value = searchedUsers.value.isEmpty ? .none : .some
+        }
+    }
+    
     // MARK: - NetworkState
     
     enum NetworkState {
@@ -98,6 +117,14 @@ struct MainViewModel {
                 self = .byAlphabet
             }
         }
+    }
+    
+    // MARK: - SearchState
+    
+    enum SearchState {
+        case `default`
+        case some
+        case none
     }
 }
 
