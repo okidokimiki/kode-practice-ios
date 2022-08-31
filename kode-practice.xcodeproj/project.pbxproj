@@ -65,6 +65,8 @@
 		04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */; };
 		04BD92F228BF6FEF009BCAC6 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92F128BF6FEF009BCAC6 /* NetworkMonitor.swift */; };
 		04BD92F428BF7067009BCAC6 /* NoInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92F328BF7067009BCAC6 /* NoInternetView.swift */; };
+		04BD92F628BF76CD009BCAC6 /* InternalErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92F528BF76CC009BCAC6 /* InternalErrorViewController.swift */; };
+		04BD92F828BF76D0009BCAC6 /* InternalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92F728BF76D0009BCAC6 /* InternalErrorView.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +133,8 @@
 		04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButtonItem.swift; sourceTree = "<group>"; };
 		04BD92F128BF6FEF009BCAC6 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		04BD92F328BF7067009BCAC6 /* NoInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetView.swift; sourceTree = "<group>"; };
+		04BD92F528BF76CC009BCAC6 /* InternalErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalErrorViewController.swift; sourceTree = "<group>"; };
+		04BD92F728BF76D0009BCAC6 /* InternalErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalErrorView.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				04BD927C28BEC663009BCAC6 /* Main */,
 				04BD92C628BF6678009BCAC6 /* Filter */,
 				04BD92D528BF6AA7009BCAC6 /* Details */,
+				04BD92F928BF778B009BCAC6 /* InternalError */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -512,6 +517,23 @@
 			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
+		04BD92F928BF778B009BCAC6 /* InternalError */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92FA28BF7791009BCAC6 /* View */,
+			);
+			path = InternalError;
+			sourceTree = "<group>";
+		};
+		04BD92FA28BF7791009BCAC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92F528BF76CC009BCAC6 /* InternalErrorViewController.swift */,
+				04BD92F728BF76D0009BCAC6 /* InternalErrorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		60BEB45A9A196D799887857E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,6 +686,7 @@
 				04BD92B728BF48FF009BCAC6 /* ImageLoader.swift in Sources */,
 				04BD92A728BF477D009BCAC6 /* BaseNetworkTask.swift in Sources */,
 				04BD92BB28BF49F7009BCAC6 /* UserTableViewCellModel.swift in Sources */,
+				04BD92F828BF76D0009BCAC6 /* InternalErrorView.swift in Sources */,
 				04BD927E28BEC687009BCAC6 /* MainView.swift in Sources */,
 				04BD926B28BEB8D2009BCAC6 /* Resources.swift in Sources */,
 				04BD926D28BEB960009BCAC6 /* UIColor+Hex.swift in Sources */,
@@ -679,6 +702,7 @@
 				04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
 				04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */,
+				04BD92F628BF76CD009BCAC6 /* InternalErrorViewController.swift in Sources */,
 				04BD92DB28BF6B14009BCAC6 /* DetailsView.swift in Sources */,
 				04BD92C928BF668E009BCAC6 /* FilterViewController.swift in Sources */,
 				04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */,
