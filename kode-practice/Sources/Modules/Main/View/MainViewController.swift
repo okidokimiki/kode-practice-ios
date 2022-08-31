@@ -9,10 +9,12 @@ final class MainViewController: BaseViewController<MainView> {
         static let skeletonTableViewCellCount: Int = 12
         static let rowCellHeight: CGFloat = 84
         static let headerViewHeight: CGFloat = 68
+        static let noInternetInitialHeight: CGFloat = 0
     }
     
     // MARK: - Views
     
+    private lazy var noInternetView = NoInternetView()
     private lazy var filterViewController = FilterViewController()
     
     // MARK: - Internal Properties
@@ -33,6 +35,7 @@ final class MainViewController: BaseViewController<MainView> {
         setupTargets()
         setupBindings()
         setupDelegates()
+        setupNoInternetView()
         
         viewModel?.getTabs()
         viewModel?.getUsers()
@@ -258,6 +261,14 @@ private extension MainViewController {
         selfView.userTableView.touchedDelegate = self
         selfView.userTableView.delegate = self
         selfView.userTableView.dataSource = self
+    }
+    
+    func setupNoInternetView() {
+        navigationController?.view.addSubview(noInternetView)
+        noInternetView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(Constants.noInternetInitialHeight)
+        }
     }
     
     func setupSelectedTab() {
