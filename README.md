@@ -14,7 +14,7 @@
 
 ## Функционал
 
-Для ознакомления с устройством фичи можно заглянуть в истории Pull Request(ов).
+Для ознакомления с устройством фичи можно заглянуть в [истории](https://github.com/okidokimiki/kode-practice-ios/pulls?q=is%3Apr+is%3Aclosed) Pull Request(ов).
 
 <table>
 	<thead>
@@ -38,7 +38,7 @@
 <table>
 	<thead>
 		<tr>
-			<th>Filer</th>
+			<th>Filter</th>
 			<th>Localization</th>
 		</tr>
 	</thead>
