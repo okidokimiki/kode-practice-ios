@@ -30,6 +30,9 @@
 		04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928C28BF3781009BCAC6 /* MainViewModel.swift */; };
 		04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929028BF37EA009BCAC6 /* TabCollectionViewCellModel.swift */; };
 		04BD929328BF381A009BCAC6 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929228BF381A009BCAC6 /* Department.swift */; };
+		04BD929628BF3C88009BCAC6 /* UserTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929528BF3C88009BCAC6 /* UserTableView.swift */; };
+		04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929728BF3CE5009BCAC6 /* UserTableViewCell.swift */; };
+		04BD929F28BF3D9E009BCAC6 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929E28BF3D9E009BCAC6 /* GradientLayer.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +64,9 @@
 		04BD928C28BF3781009BCAC6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		04BD929028BF37EA009BCAC6 /* TabCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		04BD929228BF381A009BCAC6 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		04BD929528BF3C88009BCAC6 /* UserTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableView.swift; sourceTree = "<group>"; };
+		04BD929728BF3CE5009BCAC6 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		04BD929E28BF3D9E009BCAC6 /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 			children = (
 				04BD928328BEC79D009BCAC6 /* UIKit */,
 				04BD928A28BF3724009BCAC6 /* ReuseIdentifiable.swift */,
+				04BD929E28BF3D9E009BCAC6 /* GradientLayer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				04BD928928BF36E6009BCAC6 /* TabCell */,
+				04BD929928BF3CF7009BCAC6 /* UserCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 				04BD927D28BEC687009BCAC6 /* MainView.swift */,
 				04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */,
 				04BD928428BF36B9009BCAC6 /* TabsCollectionView.swift */,
+				04BD929528BF3C88009BCAC6 /* UserTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +262,14 @@
 				04BD929228BF381A009BCAC6 /* Department.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		04BD929928BF3CF7009BCAC6 /* UserCell */ = {
+			isa = PBXGroup;
+			children = (
+				04BD929728BF3CE5009BCAC6 /* UserTableViewCell.swift */,
+			);
+			path = UserCell;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -392,7 +409,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BD929F28BF3D9E009BCAC6 /* GradientLayer.swift in Sources */,
 				04BD927528BEC033009BCAC6 /* BaseViewController.swift in Sources */,
+				04BD929628BF3C88009BCAC6 /* UserTableView.swift in Sources */,
 				04BD927E28BEC687009BCAC6 /* MainView.swift in Sources */,
 				04BD926B28BEB8D2009BCAC6 /* Resources.swift in Sources */,
 				04BD926D28BEB960009BCAC6 /* UIColor+Hex.swift in Sources */,
@@ -401,6 +420,7 @@
 				04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */,
 				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
+				04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
 				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,

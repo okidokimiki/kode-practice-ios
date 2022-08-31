@@ -3,6 +3,13 @@ import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let skeletonTableViewCellCount: Int = 12
+        static let rowCellHeight: CGFloat = 84
+    }
+    
     // MARK: - Internal Properties
     
     private var viewModel: MainViewModel?
@@ -96,6 +103,44 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UserTableViewTouchDelegate
+
+extension MainViewController: UserTableViewTouchDelegate {
+    
+    func touchesBegunInTableview(_ touches: Set<UITouch>, with event: UIEvent?) {
+        selfView.searchBar.endEditing(true)
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        Constants.rowCellHeight
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        Constants.skeletonTableViewCellCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let userCell = tableView.dequeueCell(cellType: UserTableViewCell.self)
+        userCell.shouldSkeletonViewsHide(false)
+        
+        return userCell
+    }
+}
+
 // MARK: - Private Methods
 
 private extension MainViewController {
@@ -112,6 +157,9 @@ private extension MainViewController {
         selfView.searchBar.delegate = self
         selfView.tabsCollectionView.delegate = self
         selfView.tabsCollectionView.dataSource = self
+        selfView.userTableView.touchedDelegate = self
+        selfView.userTableView.delegate = self
+        selfView.userTableView.dataSource = self
     }
     
     func setupSelectedTab() {
