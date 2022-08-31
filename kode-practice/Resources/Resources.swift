@@ -137,5 +137,9 @@ enum Resources {
         enum NSObjectValue: String {
             case cancelButtonText = "cancelButtonText"
         }
+        
+        enum UserDefaults: String {
+            case selectedTab = "selectedTab"
+        }
     }
 }

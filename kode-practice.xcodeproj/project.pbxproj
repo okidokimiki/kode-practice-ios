@@ -24,6 +24,12 @@
 		04BD927E28BEC687009BCAC6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD927D28BEC687009BCAC6 /* MainView.swift */; };
 		04BD928028BEC6B9009BCAC6 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */; };
 		04BD928228BEC779009BCAC6 /* UIImage+ModifiedUISearchBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928128BEC779009BCAC6 /* UIImage+ModifiedUISearchBarHeight.swift */; };
+		04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928428BF36B9009BCAC6 /* TabsCollectionView.swift */; };
+		04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928628BF36D9009BCAC6 /* TabCollectionViewCell.swift */; };
+		04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928A28BF3724009BCAC6 /* ReuseIdentifiable.swift */; };
+		04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD928C28BF3781009BCAC6 /* MainViewModel.swift */; };
+		04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929028BF37EA009BCAC6 /* TabCollectionViewCellModel.swift */; };
+		04BD929328BF381A009BCAC6 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD929228BF381A009BCAC6 /* Department.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +55,12 @@
 		04BD927D28BEC687009BCAC6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		04BD928128BEC779009BCAC6 /* UIImage+ModifiedUISearchBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ModifiedUISearchBarHeight.swift"; sourceTree = "<group>"; };
+		04BD928428BF36B9009BCAC6 /* TabsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsCollectionView.swift; sourceTree = "<group>"; };
+		04BD928628BF36D9009BCAC6 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		04BD928A28BF3724009BCAC6 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		04BD928C28BF3781009BCAC6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		04BD929028BF37EA009BCAC6 /* TabCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCellModel.swift; sourceTree = "<group>"; };
+		04BD929228BF381A009BCAC6 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				04BD928328BEC79D009BCAC6 /* UIKit */,
+				04BD928A28BF3724009BCAC6 /* ReuseIdentifiable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -155,6 +168,7 @@
 		04BD927328BEBBCE009BCAC6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				04BD929428BF3828009BCAC6 /* DTO */,
 				04BD926F28BEBB81009BCAC6 /* Modules */,
 				04BD926E28BEBB77009BCAC6 /* Supporting */,
 			);
@@ -181,9 +195,8 @@
 		04BD927C28BEC663009BCAC6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				04B69F0928BE7B8E00430E72 /* MainViewController.swift */,
-				04BD927D28BEC687009BCAC6 /* MainView.swift */,
-				04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */,
+				04BD928F28BF379D009BCAC6 /* View */,
+				04BD928E28BF3787009BCAC6 /* ViewModel */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -195,6 +208,51 @@
 				04BD926C28BEB960009BCAC6 /* UIColor+Hex.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		04BD928828BF36DC009BCAC6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04BD928928BF36E6009BCAC6 /* TabCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		04BD928928BF36E6009BCAC6 /* TabCell */ = {
+			isa = PBXGroup;
+			children = (
+				04BD928628BF36D9009BCAC6 /* TabCollectionViewCell.swift */,
+			);
+			path = TabCell;
+			sourceTree = "<group>";
+		};
+		04BD928E28BF3787009BCAC6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04BD928C28BF3781009BCAC6 /* MainViewModel.swift */,
+				04BD929028BF37EA009BCAC6 /* TabCollectionViewCellModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04BD928F28BF379D009BCAC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BD928828BF36DC009BCAC6 /* Cells */,
+				04B69F0928BE7B8E00430E72 /* MainViewController.swift */,
+				04BD927D28BEC687009BCAC6 /* MainView.swift */,
+				04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */,
+				04BD928428BF36B9009BCAC6 /* TabsCollectionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04BD929428BF3828009BCAC6 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				04BD929228BF381A009BCAC6 /* Department.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -340,10 +398,16 @@
 				04BD926D28BEB960009BCAC6 /* UIColor+Hex.swift in Sources */,
 				04BD927A28BEC2D9009BCAC6 /* Observable.swift in Sources */,
 				04BD928028BEC6B9009BCAC6 /* SearchBar.swift in Sources */,
+				04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */,
+				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
+				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
+				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
+				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,
 				04B69F0A28BE7B8E00430E72 /* MainViewController.swift in Sources */,
 				04B69F0628BE7B8E00430E72 /* AppDelegate.swift in Sources */,
 				04BD928228BEC779009BCAC6 /* UIImage+ModifiedUISearchBarHeight.swift in Sources */,
+				04BD929328BF381A009BCAC6 /* Department.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
