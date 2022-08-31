@@ -23,7 +23,7 @@ final class UserTableView: UITableView {
     // MARK: - UITableView
     
     convenience init(refreshController: UIRefreshControl) {
-        self.init(frame: .zero, style: .plain)
+        self.init(frame: .zero, style: .grouped)
         self.refreshController = refreshController
         confugureAppearance()
         registerCells()
