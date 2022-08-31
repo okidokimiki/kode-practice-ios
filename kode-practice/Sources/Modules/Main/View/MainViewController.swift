@@ -8,6 +8,7 @@ final class MainViewController: BaseViewController<MainView> {
     private enum Constants {
         static let skeletonTableViewCellCount: Int = 12
         static let rowCellHeight: CGFloat = 84
+        static let headerViewHeight: CGFloat = 68
     }
     
     // MARK: - Internal Properties
@@ -42,6 +43,8 @@ final class MainViewController: BaseViewController<MainView> {
 // MARK: - UISearchBarDelegate
 
 extension MainViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) { }
         
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
@@ -54,6 +57,21 @@ extension MainViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.endEditing(true)
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        // temp
+        viewModel?.filteredBy.value.toggle()
+        selfView.userTableView.reloadData()
+        selfView.searchBar.text = ""
+        self.searchBar(selfView.searchBar, textDidChange: "")
+        guard let viewModel = viewModel else { return }
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            selfView.searchBar.setImage(R.Images.SearchBar.rightImageNormal, for: .bookmark, state: .normal)
+        case .byBirthday:
+            selfView.searchBar.setImage(R.Images.SearchBar.rightImageSelected, for: .bookmark, state: .normal)
+        }
     }
 }
 
@@ -121,18 +139,53 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         Constants.rowCellHeight
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        section != .zero ? UserHeaderView() : nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        section != .zero ? Constants.headerViewHeight : .zero
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let viewModel = viewModel, let userCell = cell as? UserTableViewCell else { return }
+        
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            userCell.shouldBirthdayDateHide(true)
+        case .byBirthday:
+            userCell.shouldBirthdayDateHide(false)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let viewModel = viewModel else { return .zero }
+        
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            return .one
+        case .byBirthday:
+            return .two
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else {
             return Constants.skeletonTableViewCellCount
         }
         
-        return viewModel.departmentUsers.value.count
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            return viewModel.filteredByAlphabetUsers.count
+        case .byBirthday:
+            return section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers.count : viewModel.filteredByHappyBirthdayNextYearUsers.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,7 +193,13 @@ extension MainViewController: UITableViewDataSource {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
-        userCell.configure(with: viewModel.departmentUsers.value[indexPath.row])
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            userCell.configure(with: viewModel.filteredByAlphabetUsers[indexPath.item])
+        case .byBirthday:
+            let models = indexPath.section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers : viewModel.filteredByHappyBirthdayNextYearUsers
+            userCell.configure(with: models[indexPath.item])
+        }
         
         return userCell
     }
@@ -187,6 +246,12 @@ private extension MainViewController {
                 self?.selfView.refreshControl.endRefreshing()
                 self?.selfView.userTableView.reloadData()
                 self?.setupSelectedTab()
+            }
+        }
+        
+        viewModel?.filteredBy.observe { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.selfView.userTableView.reloadData()
             }
         }
     }

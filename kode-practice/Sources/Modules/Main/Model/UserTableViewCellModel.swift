@@ -17,3 +17,24 @@ struct UserTableViewCellModel {
         self.phone = item.phone
     }
 }
+
+extension UserTableViewCellModel {
+    var shortFormatBirthday: String? {
+        guard let birthdayDate = birthdayDate else { return nil }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        
+        dateFormatter.dateFormat = "d"
+        let day = dateFormatter
+            .string(from: birthdayDate)
+        
+        dateFormatter.dateFormat = "MMM"
+        let month = dateFormatter
+            .string(from: birthdayDate)
+            .prefix(3)
+            .replacingOccurrences(of: ".", with: "")
+
+        return "\(day) \(month)"
+    }
+}

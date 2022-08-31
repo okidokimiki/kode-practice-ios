@@ -104,6 +104,7 @@ final class UserTableViewCell: UITableViewCell {
     }
         
     func configure(with model: UserTableViewCellModel) {
+        birthdayDateLabel.text = model.shortFormatBirthday
         avatarImageView.loadImage(from: model.logoUrl)
         departmentLabel.text = model.department.title
         fullNameLabel.text = model.fullName
@@ -112,6 +113,10 @@ final class UserTableViewCell: UITableViewCell {
     
     func shouldSkeletonViewsHide(_ shouldHide: Bool) {
         [skeletonAvatarView, skeletonFullNameView, skeletonDepartmentView].forEach { $0.isHidden = shouldHide }
+    }
+    
+    func shouldBirthdayDateHide(_ shouldHide: Bool) {
+        birthdayDateLabel.isHidden = shouldHide
     }
 }
 
