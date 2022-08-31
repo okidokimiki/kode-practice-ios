@@ -40,6 +40,8 @@
 		04BD92AE28BF47B8009BCAC6 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92AD28BF47B8009BCAC6 /* EmptyModel.swift */; };
 		04BD92B128BF487F009BCAC6 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92B028BF487F009BCAC6 /* UsersService.swift */; };
 		04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92B228BF488E009BCAC6 /* UserModel.swift */; };
+		04BD92B728BF48FF009BCAC6 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92B628BF48FF009BCAC6 /* ImageLoader.swift */; };
+		04BD92B928BF490F009BCAC6 /* UIImageView+ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92B828BF490F009BCAC6 /* UIImageView+ImageLoader.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		04BD92AD28BF47B8009BCAC6 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 		04BD92B028BF487F009BCAC6 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
 		04BD92B228BF488E009BCAC6 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		04BD92B628BF48FF009BCAC6 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		04BD92B828BF490F009BCAC6 /* UIImageView+ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageLoader.swift"; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 		04BD92AF28BF4870009BCAC6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				04BD92B528BF48F7009BCAC6 /* ImageLoader */,
 				04BD92B428BF489D009BCAC6 /* UsersService */,
 			);
 			path = Networking;
@@ -323,6 +328,15 @@
 				04BD92B228BF488E009BCAC6 /* UserModel.swift */,
 			);
 			path = UsersService;
+			sourceTree = "<group>";
+		};
+		04BD92B528BF48F7009BCAC6 /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92B628BF48FF009BCAC6 /* ImageLoader.swift */,
+				04BD92B828BF490F009BCAC6 /* UIImageView+ImageLoader.swift */,
+			);
+			path = ImageLoader;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -467,6 +481,7 @@
 				04BD927528BEC033009BCAC6 /* BaseViewController.swift in Sources */,
 				04BD92B128BF487F009BCAC6 /* UsersService.swift in Sources */,
 				04BD929628BF3C88009BCAC6 /* UserTableView.swift in Sources */,
+				04BD92B728BF48FF009BCAC6 /* ImageLoader.swift in Sources */,
 				04BD92A728BF477D009BCAC6 /* BaseNetworkTask.swift in Sources */,
 				04BD927E28BEC687009BCAC6 /* MainView.swift in Sources */,
 				04BD926B28BEB8D2009BCAC6 /* Resources.swift in Sources */,
@@ -478,6 +493,7 @@
 				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
 				04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */,
+				04BD92B928BF490F009BCAC6 /* UIImageView+ImageLoader.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
 				04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */,
