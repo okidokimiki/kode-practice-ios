@@ -53,6 +53,16 @@
 		04BD92CF28BF66C3009BCAC6 /* RadioButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92CE28BF66C3009BCAC6 /* RadioButtonController.swift */; };
 		04BD92D128BF66DC009BCAC6 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */; };
 		04BD92D428BF670B009BCAC6 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92D328BF670B009BCAC6 /* FilterType.swift */; };
+		04BD92D928BF6AED009BCAC6 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92D828BF6AED009BCAC6 /* DetailsViewController.swift */; };
+		04BD92DB28BF6B14009BCAC6 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92DA28BF6B14009BCAC6 /* DetailsView.swift */; };
+		04BD92DD28BF6B2D009BCAC6 /* InfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92DC28BF6B2D009BCAC6 /* InfoTableView.swift */; };
+		04BD92E028BF6B4F009BCAC6 /* DateInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92DF28BF6B4F009BCAC6 /* DateInfoTableViewCell.swift */; };
+		04BD92E328BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92E228BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift */; };
+		04BD92E628BF6BA6009BCAC6 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92E528BF6BA6009BCAC6 /* DetailsViewModel.swift */; };
+		04BD92E928BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92E828BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift */; };
+		04BD92EB28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */; };
+		04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */; };
+		04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +117,16 @@
 		04BD92CE28BF66C3009BCAC6 /* RadioButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonController.swift; sourceTree = "<group>"; };
 		04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		04BD92D328BF670B009BCAC6 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
+		04BD92D828BF6AED009BCAC6 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		04BD92DA28BF6B14009BCAC6 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		04BD92DC28BF6B2D009BCAC6 /* InfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableView.swift; sourceTree = "<group>"; };
+		04BD92DF28BF6B4F009BCAC6 /* DateInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04BD92E228BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04BD92E528BF6BA6009BCAC6 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		04BD92E828BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCellModel.swift; sourceTree = "<group>"; };
+		04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoTableViewCellModel.swift; sourceTree = "<group>"; };
+		04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+WordAge.swift"; sourceTree = "<group>"; };
+		04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButtonItem.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +199,7 @@
 			children = (
 				04BD927C28BEC663009BCAC6 /* Main */,
 				04BD92C628BF6678009BCAC6 /* Filter */,
+				04BD92D528BF6AA7009BCAC6 /* Details */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -380,6 +401,7 @@
 			children = (
 				04BD92BD28BF5980009BCAC6 /* Date+MonthDay.swift */,
 				04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */,
+				04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -410,6 +432,70 @@
 				04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04BD92D528BF6AA7009BCAC6 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92D628BF6AB1009BCAC6 /* View */,
+				04BD92E728BF6BB5009BCAC6 /* Model */,
+				04BD92D728BF6ABE009BCAC6 /* ViewModel */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		04BD92D628BF6AB1009BCAC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92DE28BF6B3B009BCAC6 /* Cells */,
+				04BD92D828BF6AED009BCAC6 /* DetailsViewController.swift */,
+				04BD92DA28BF6B14009BCAC6 /* DetailsView.swift */,
+				04BD92DC28BF6B2D009BCAC6 /* InfoTableView.swift */,
+				04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04BD92D728BF6ABE009BCAC6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92E528BF6BA6009BCAC6 /* DetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04BD92DE28BF6B3B009BCAC6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92E128BF6B5E009BCAC6 /* DateCell */,
+				04BD92E428BF6B85009BCAC6 /* PhoneCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		04BD92E128BF6B5E009BCAC6 /* DateCell */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92DF28BF6B4F009BCAC6 /* DateInfoTableViewCell.swift */,
+			);
+			path = DateCell;
+			sourceTree = "<group>";
+		};
+		04BD92E428BF6B85009BCAC6 /* PhoneCell */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92E228BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift */,
+			);
+			path = PhoneCell;
+			sourceTree = "<group>";
+		};
+		04BD92E728BF6BB5009BCAC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92E828BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift */,
+				04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -555,6 +641,8 @@
 				04BD92C128BF5B30009BCAC6 /* Int+Numbers.swift in Sources */,
 				04BD929F28BF3D9E009BCAC6 /* GradientLayer.swift in Sources */,
 				04BD927528BEC033009BCAC6 /* BaseViewController.swift in Sources */,
+				04BD92E928BF6BBE009BCAC6 /* DateInfoTableViewCellModel.swift in Sources */,
+				04BD92E028BF6B4F009BCAC6 /* DateInfoTableViewCell.swift in Sources */,
 				04BD92B128BF487F009BCAC6 /* UsersService.swift in Sources */,
 				04BD92D128BF66DC009BCAC6 /* FilterViewModel.swift in Sources */,
 				04BD929628BF3C88009BCAC6 /* UserTableView.swift in Sources */,
@@ -565,25 +653,33 @@
 				04BD926B28BEB8D2009BCAC6 /* Resources.swift in Sources */,
 				04BD926D28BEB960009BCAC6 /* UIColor+Hex.swift in Sources */,
 				04BD927A28BEC2D9009BCAC6 /* Observable.swift in Sources */,
+				04BD92E628BF6BA6009BCAC6 /* DetailsViewModel.swift in Sources */,
 				04BD92CF28BF66C3009BCAC6 /* RadioButtonController.swift in Sources */,
 				04BD928028BEC6B9009BCAC6 /* SearchBar.swift in Sources */,
 				04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */,
+				04BD92D928BF6AED009BCAC6 /* DetailsViewController.swift in Sources */,
 				04BD92AE28BF47B8009BCAC6 /* EmptyModel.swift in Sources */,
 				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
 				04BD92C328BF5B90009BCAC6 /* UserHeaderView.swift in Sources */,
+				04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
+				04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */,
+				04BD92DB28BF6B14009BCAC6 /* DetailsView.swift in Sources */,
 				04BD92C928BF668E009BCAC6 /* FilterViewController.swift in Sources */,
 				04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */,
 				04BD92B928BF490F009BCAC6 /* UIImageView+ImageLoader.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
 				04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */,
+				04BD92E328BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift in Sources */,
 				04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */,
 				04BD92CD28BF66B1009BCAC6 /* RadioButton.swift in Sources */,
 				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,
 				04BD92CB28BF669F009BCAC6 /* FilterView.swift in Sources */,
+				04BD92EB28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift in Sources */,
 				04BD92A528BF475F009BCAC6 /* NetworkTask.swift in Sources */,
 				04B69F0A28BE7B8E00430E72 /* MainViewController.swift in Sources */,
+				04BD92DD28BF6B2D009BCAC6 /* InfoTableView.swift in Sources */,
 				04B69F0628BE7B8E00430E72 /* AppDelegate.swift in Sources */,
 				04BD92AC28BF47AC009BCAC6 /* HTTPMethod.swift in Sources */,
 				04BD928228BEC779009BCAC6 /* UIImage+ModifiedUISearchBarHeight.swift in Sources */,

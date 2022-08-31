@@ -149,7 +149,22 @@ extension MainViewController: UserTableViewTouchDelegate {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return }
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let detailsViewModel: DetailsViewModel
+        switch viewModel.filteredBy.value {
+        case .byAlphabet:
+            detailsViewModel = .init(viewModel.filteredByAlphabetUsers[indexPath.item])
+        case .byBirthday:
+            if indexPath.section == .zero {
+                detailsViewModel = .init(viewModel.filteredByHappyBirthdayThisYearUsers[indexPath.item])
+            } else {
+                detailsViewModel = .init(viewModel.filteredByHappyBirthdayNextYearUsers[indexPath.item])
+            }
+        }
+        
+        navigationController?.pushViewController(DetailsViewController(viewModel: detailsViewModel), animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
