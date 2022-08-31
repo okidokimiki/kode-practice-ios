@@ -47,6 +47,12 @@
 		04BD92C128BF5B30009BCAC6 /* Int+Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */; };
 		04BD92C328BF5B90009BCAC6 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C228BF5B90009BCAC6 /* UserHeaderView.swift */; };
 		04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C428BF61CF009BCAC6 /* NoSearchResultView.swift */; };
+		04BD92C928BF668E009BCAC6 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C828BF668E009BCAC6 /* FilterViewController.swift */; };
+		04BD92CB28BF669F009BCAC6 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92CA28BF669F009BCAC6 /* FilterView.swift */; };
+		04BD92CD28BF66B1009BCAC6 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92CC28BF66B1009BCAC6 /* RadioButton.swift */; };
+		04BD92CF28BF66C3009BCAC6 /* RadioButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92CE28BF66C3009BCAC6 /* RadioButtonController.swift */; };
+		04BD92D128BF66DC009BCAC6 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */; };
+		04BD92D428BF670B009BCAC6 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92D328BF670B009BCAC6 /* FilterType.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +101,12 @@
 		04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Numbers.swift"; sourceTree = "<group>"; };
 		04BD92C228BF5B90009BCAC6 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		04BD92C428BF61CF009BCAC6 /* NoSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultView.swift; sourceTree = "<group>"; };
+		04BD92C828BF668E009BCAC6 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		04BD92CA28BF669F009BCAC6 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		04BD92CC28BF66B1009BCAC6 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		04BD92CE28BF66C3009BCAC6 /* RadioButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonController.swift; sourceTree = "<group>"; };
+		04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		04BD92D328BF670B009BCAC6 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				04BD927C28BEC663009BCAC6 /* Main */,
+				04BD92C628BF6678009BCAC6 /* Filter */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -268,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				04BD928C28BF3781009BCAC6 /* MainViewModel.swift */,
+				04BD92D328BF670B009BCAC6 /* FilterType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -368,6 +382,34 @@
 				04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		04BD92C628BF6678009BCAC6 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92C728BF6686009BCAC6 /* View */,
+				04BD92D228BF66E6009BCAC6 /* ViewModel */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		04BD92C728BF6686009BCAC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92C828BF668E009BCAC6 /* FilterViewController.swift */,
+				04BD92CA28BF669F009BCAC6 /* FilterView.swift */,
+				04BD92CE28BF66C3009BCAC6 /* RadioButtonController.swift */,
+				04BD92CC28BF66B1009BCAC6 /* RadioButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04BD92D228BF66E6009BCAC6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92D028BF66DC009BCAC6 /* FilterViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -509,10 +551,12 @@
 			files = (
 				04BD92A228BF4740009BCAC6 /* Item.swift in Sources */,
 				04BD92BE28BF5980009BCAC6 /* Date+MonthDay.swift in Sources */,
+				04BD92D428BF670B009BCAC6 /* FilterType.swift in Sources */,
 				04BD92C128BF5B30009BCAC6 /* Int+Numbers.swift in Sources */,
 				04BD929F28BF3D9E009BCAC6 /* GradientLayer.swift in Sources */,
 				04BD927528BEC033009BCAC6 /* BaseViewController.swift in Sources */,
 				04BD92B128BF487F009BCAC6 /* UsersService.swift in Sources */,
+				04BD92D128BF66DC009BCAC6 /* FilterViewModel.swift in Sources */,
 				04BD929628BF3C88009BCAC6 /* UserTableView.swift in Sources */,
 				04BD92B728BF48FF009BCAC6 /* ImageLoader.swift in Sources */,
 				04BD92A728BF477D009BCAC6 /* BaseNetworkTask.swift in Sources */,
@@ -521,19 +565,23 @@
 				04BD926B28BEB8D2009BCAC6 /* Resources.swift in Sources */,
 				04BD926D28BEB960009BCAC6 /* UIColor+Hex.swift in Sources */,
 				04BD927A28BEC2D9009BCAC6 /* Observable.swift in Sources */,
+				04BD92CF28BF66C3009BCAC6 /* RadioButtonController.swift in Sources */,
 				04BD928028BEC6B9009BCAC6 /* SearchBar.swift in Sources */,
 				04BD929128BF37EA009BCAC6 /* TabCollectionViewCellModel.swift in Sources */,
 				04BD92AE28BF47B8009BCAC6 /* EmptyModel.swift in Sources */,
 				04BD928B28BF3724009BCAC6 /* ReuseIdentifiable.swift in Sources */,
 				04BD92C328BF5B90009BCAC6 /* UserHeaderView.swift in Sources */,
 				04BD928D28BF3781009BCAC6 /* MainViewModel.swift in Sources */,
+				04BD92C928BF668E009BCAC6 /* FilterViewController.swift in Sources */,
 				04BD929828BF3CE5009BCAC6 /* UserTableViewCell.swift in Sources */,
 				04BD92B928BF490F009BCAC6 /* UIImageView+ImageLoader.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
 				04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */,
 				04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */,
+				04BD92CD28BF66B1009BCAC6 /* RadioButton.swift in Sources */,
 				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,
+				04BD92CB28BF669F009BCAC6 /* FilterView.swift in Sources */,
 				04BD92A528BF475F009BCAC6 /* NetworkTask.swift in Sources */,
 				04B69F0A28BE7B8E00430E72 /* MainViewController.swift in Sources */,
 				04B69F0628BE7B8E00430E72 /* AppDelegate.swift in Sources */,

@@ -11,6 +11,10 @@ final class MainViewController: BaseViewController<MainView> {
         static let headerViewHeight: CGFloat = 68
     }
     
+    // MARK: - Views
+    
+    private lazy var filterViewController = FilterViewController()
+    
     // MARK: - Internal Properties
     
     private var viewModel: MainViewModel?
@@ -40,6 +44,25 @@ final class MainViewController: BaseViewController<MainView> {
     }
 }
 
+// MARK: - FilterDelegate
+
+extension MainViewController: FilterDelegate {
+    
+    func sortDidChange(by filter: FilterType) {
+        viewModel?.filteredBy.value = filter
+        
+        selfView.userTableView.reloadData()
+        selfView.searchBar.text = ""
+        searchBar(selfView.searchBar, textDidChange: "")
+        switch filter {
+        case .byAlphabet:
+            selfView.searchBar.setImage(R.Images.SearchBar.rightImageNormal, for: .bookmark, state: .normal)
+        case .byBirthday:
+            selfView.searchBar.setImage(R.Images.SearchBar.rightImageSelected, for: .bookmark, state: .normal)
+        }
+    }
+}
+
 // MARK: - UISearchBarDelegate
 
 extension MainViewController: UISearchBarDelegate {
@@ -62,18 +85,9 @@ extension MainViewController: UISearchBarDelegate {
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        // temp
-        viewModel?.filteredBy.value.toggle()
-        selfView.userTableView.reloadData()
-        selfView.searchBar.text = ""
-        self.searchBar(selfView.searchBar, textDidChange: "")
         guard let viewModel = viewModel else { return }
-        switch viewModel.filteredBy.value {
-        case .byAlphabet:
-            selfView.searchBar.setImage(R.Images.SearchBar.rightImageNormal, for: .bookmark, state: .normal)
-        case .byBirthday:
-            selfView.searchBar.setImage(R.Images.SearchBar.rightImageSelected, for: .bookmark, state: .normal)
-        }
+        filterViewController.viewModel = .init(selectedFiltered: viewModel.filteredBy)
+        present(filterViewController, animated: true)
     }
 }
 
@@ -221,6 +235,8 @@ private extension MainViewController {
     }
     
     func setupDelegates() {
+        filterViewController.delegate = self
+        
         selfView.searchBar.delegate = self
         selfView.tabsCollectionView.delegate = self
         selfView.tabsCollectionView.dataSource = self
@@ -252,12 +268,6 @@ private extension MainViewController {
         }
         
         viewModel?.searchedUsers.observe { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.selfView.userTableView.reloadData()
-            }
-        }
-        
-        viewModel?.filteredBy.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.userTableView.reloadData()
             }
