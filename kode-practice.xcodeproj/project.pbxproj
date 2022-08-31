@@ -63,6 +63,7 @@
 		04BD92EB28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */; };
 		04BD92ED28BF6C09009BCAC6 /* Int+WordAge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */; };
 		04BD92EF28BF6CE5009BCAC6 /* BackBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */; };
+		04BD92F228BF6FEF009BCAC6 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92F128BF6FEF009BCAC6 /* NetworkMonitor.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,7 @@
 		04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoTableViewCellModel.swift; sourceTree = "<group>"; };
 		04BD92EC28BF6C09009BCAC6 /* Int+WordAge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+WordAge.swift"; sourceTree = "<group>"; };
 		04BD92EE28BF6CE5009BCAC6 /* BackBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButtonItem.swift; sourceTree = "<group>"; };
+		04BD92F128BF6FEF009BCAC6 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 			children = (
 				04BD92B528BF48F7009BCAC6 /* ImageLoader */,
 				04BD92B428BF489D009BCAC6 /* UsersService */,
+				04BD92F028BF6FE9009BCAC6 /* NetworkMonitor */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -496,6 +499,14 @@
 				04BD92EA28BF6BCA009BCAC6 /* PhoneInfoTableViewCellModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		04BD92F028BF6FE9009BCAC6 /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				04BD92F128BF6FEF009BCAC6 /* NetworkMonitor.swift */,
+			);
+			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 		60BEB45A9A196D799887857E /* Pods */ = {
@@ -672,6 +683,7 @@
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
 				04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */,
 				04BD92E328BF6B77009BCAC6 /* PhoneInfoTableViewCell.swift in Sources */,
+				04BD92F228BF6FEF009BCAC6 /* NetworkMonitor.swift in Sources */,
 				04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */,
 				04BD92CD28BF66B1009BCAC6 /* RadioButton.swift in Sources */,
 				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,
