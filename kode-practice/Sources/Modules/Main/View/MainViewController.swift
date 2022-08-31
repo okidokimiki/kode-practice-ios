@@ -37,6 +37,8 @@ final class MainViewController: BaseViewController<MainView> {
         setupDelegates()
         setupNoInternetView()
         
+        subscribeToNotifications()
+        
         viewModel?.getTabs()
         viewModel?.getUsers()
     }
@@ -308,6 +310,52 @@ private extension MainViewController {
                 }
             }
         }
+        
+        viewModel?.networkState.observe { [weak self] state in
+            DispatchQueue.main.async {
+                if case let .failed(failureReason) = state {
+                    switch failureReason {
+                    case .internalServerError(let internalError):
+                        // handle in internalError
+                        print(internalError)
+                    case .noInternet:
+                        self?.shouldNoInternetViewBePresented(true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func shouldNoInternetViewBePresented(_ shouldPresenet: Bool) {
+        var topBarHeight: CGFloat {
+            var top = self.navigationController?.navigationBar.frame.height ?? .zero
+            top += UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? .zero
+            
+            return top
+        }
+        
+        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? topBarHeight : .zero) }
+        
+        noInternetView.setNeedsUpdateConstraints()
+        UIView.animate(withDuration: 0.5) { self.noInternetView.layoutIfNeeded() } completion: { done in
+            if done {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    guard self.noInternetView.frame.height != topBarHeight else {
+                        self.shouldNoInternetViewBePresented(false)
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func subscribeToNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(connectivityStatusChanged),
+            name: NSNotification.Name.connectivityStatus,
+            object: nil
+        )
     }
 }
 
@@ -323,5 +371,13 @@ private extension MainViewController {
     
     func refreshControlDidScroll(_ refreshControl: UIRefreshControl) {
         viewModel?.getUsers()
+    }
+    
+    func connectivityStatusChanged(_ notification: Notification) {
+        if NetworkMonitor.shared.isConnected {
+            viewModel?.networkState.value = .default
+        } else {
+            viewModel?.networkState.value = .failed(.noInternet)
+        }
     }
 }

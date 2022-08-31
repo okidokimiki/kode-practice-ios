@@ -9,6 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         configureWindow()
+        launchCheckingNetworkConnection()
         
         return true
     }
@@ -23,5 +24,9 @@ private extension AppDelegate {
         
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.overrideUserInterfaceStyle = .light
+    }
+    
+    func launchCheckingNetworkConnection() {
+        NetworkMonitor.shared.startMonitoring()
     }
 }
