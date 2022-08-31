@@ -44,7 +44,9 @@ final class MainViewController: BaseViewController<MainView> {
 
 extension MainViewController: UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) { }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel?.getSearchedUsers(by: searchText)
+    }
         
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
@@ -244,14 +246,30 @@ private extension MainViewController {
         viewModel?.departmentUsers.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.refreshControl.endRefreshing()
-                self?.selfView.userTableView.reloadData()
+                self?.viewModel?.getSearchedUsers()
                 self?.setupSelectedTab()
+            }
+        }
+        
+        viewModel?.searchedUsers.observe { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.selfView.userTableView.reloadData()
             }
         }
         
         viewModel?.filteredBy.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.userTableView.reloadData()
+            }
+        }
+        
+        viewModel?.searchState.observe { [weak self] state in
+            DispatchQueue.main.async {
+                if case .none = state {
+                    self?.selfView.noSearchResultView.shouldHideView(false)
+                } else {
+                    self?.selfView.noSearchResultView.shouldHideView(true)
+                }
             }
         }
     }
