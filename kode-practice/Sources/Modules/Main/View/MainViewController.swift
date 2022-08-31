@@ -140,7 +140,7 @@ extension MainViewController: UITableViewDataSource {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
-        userCell.configure(with: viewModel.departmentUsers.value[indexPath.row])
+        userCell.configure(with: viewModel.filteredByAlphabetUsers[indexPath.row])
         
         return userCell
     }

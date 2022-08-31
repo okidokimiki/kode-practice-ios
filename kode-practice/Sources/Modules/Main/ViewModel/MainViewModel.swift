@@ -1,6 +1,7 @@
 /*
  users --
      departamentUsers --
+        filteredByAlphabetUsers
  */
 
 import Foundation
@@ -20,6 +21,10 @@ struct MainViewModel {
     
     var selectedTabNumber: Int {
         UserDefaults.standard.integer(forKey: R.Keys.UserDefaults.selectedTab.rawValue)
+    }
+    
+    var filteredByAlphabetUsers: [UserTableViewCellModel] {
+        departmentUsers.value.sorted { $0.fullName < $1.fullName }
     }
     
     // MARK: - Public Methods
