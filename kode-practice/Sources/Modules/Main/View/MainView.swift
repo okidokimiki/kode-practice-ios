@@ -18,6 +18,7 @@ final class MainView: BaseView {
     lazy var tabsCollectionView = TabsCollectionView()
     lazy var userTableView = UserTableView(refreshController: refreshControl)
     lazy var refreshControl = UIRefreshControl()
+    lazy var noSearchResultView = NoSearchResultView()
     
     // MARK: - Appearance
     
@@ -30,7 +31,7 @@ final class MainView: BaseView {
     
     override func configureUI() {
         super.configureUI()
-        [tabsCollectionView, separatorView, userTableView].forEach { addSubview($0) }
+        [tabsCollectionView, separatorView, userTableView, noSearchResultView].forEach { addSubview($0) }
         
         tabsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
@@ -45,6 +46,11 @@ final class MainView: BaseView {
         }
         
         userTableView.snp.makeConstraints { make in
+            make.top.equalTo(separatorView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        noSearchResultView.snp.makeConstraints { make in
             make.top.equalTo(separatorView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }

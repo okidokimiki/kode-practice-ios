@@ -46,6 +46,7 @@
 		04BD92BE28BF5980009BCAC6 /* Date+MonthDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92BD28BF5980009BCAC6 /* Date+MonthDay.swift */; };
 		04BD92C128BF5B30009BCAC6 /* Int+Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */; };
 		04BD92C328BF5B90009BCAC6 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C228BF5B90009BCAC6 /* UserHeaderView.swift */; };
+		04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD92C428BF61CF009BCAC6 /* NoSearchResultView.swift */; };
 		824206A9F22FA247FDED31AE /* Pods_kode_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		04BD92BD28BF5980009BCAC6 /* Date+MonthDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+MonthDay.swift"; sourceTree = "<group>"; };
 		04BD92C028BF5B30009BCAC6 /* Int+Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Numbers.swift"; sourceTree = "<group>"; };
 		04BD92C228BF5B90009BCAC6 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		04BD92C428BF61CF009BCAC6 /* NoSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultView.swift; sourceTree = "<group>"; };
 		894C511924CFB0ACD8484140 /* Pods_kode_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kode_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA867C8A5FFDED63EE852D /* Pods-kode-practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.debug.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.debug.xcconfig"; sourceTree = "<group>"; };
 		D4698D22B4AFDB35506F9D79 /* Pods-kode-practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kode-practice.release.xcconfig"; path = "Target Support Files/Pods-kode-practice/Pods-kode-practice.release.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				04B69F0928BE7B8E00430E72 /* MainViewController.swift */,
 				04BD927D28BEC687009BCAC6 /* MainView.swift */,
 				04BD927F28BEC6B9009BCAC6 /* SearchBar.swift */,
+				04BD92C428BF61CF009BCAC6 /* NoSearchResultView.swift */,
 				04BD928428BF36B9009BCAC6 /* TabsCollectionView.swift */,
 				04BD929528BF3C88009BCAC6 /* UserTableView.swift */,
 				04BD92C228BF5B90009BCAC6 /* UserHeaderView.swift */,
@@ -528,6 +531,7 @@
 				04BD92B928BF490F009BCAC6 /* UIImageView+ImageLoader.swift in Sources */,
 				04BD927728BEC047009BCAC6 /* BaseView.swift in Sources */,
 				04BD928528BF36B9009BCAC6 /* TabsCollectionView.swift in Sources */,
+				04BD92C528BF61D0009BCAC6 /* NoSearchResultView.swift in Sources */,
 				04BD92B328BF488E009BCAC6 /* UserModel.swift in Sources */,
 				04BD928728BF36D9009BCAC6 /* TabCollectionViewCell.swift in Sources */,
 				04BD92A528BF475F009BCAC6 /* NetworkTask.swift in Sources */,

@@ -262,6 +262,16 @@ private extension MainViewController {
                 self?.selfView.userTableView.reloadData()
             }
         }
+        
+        viewModel?.searchState.observe { [weak self] state in
+            DispatchQueue.main.async {
+                if case .none = state {
+                    self?.selfView.noSearchResultView.shouldHideView(false)
+                } else {
+                    self?.selfView.noSearchResultView.shouldHideView(true)
+                }
+            }
+        }
     }
 }
 
