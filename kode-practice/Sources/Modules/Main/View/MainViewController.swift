@@ -332,7 +332,8 @@ private extension MainViewController {
                 if case let .failed(failureReason) = state {
                     switch failureReason {
                     case .internalServerError(let internalError):
-                        // handle in internalError
+                        print("!__: ", internalError)
+                        self?.issueInternalErrorAlert { self?.viewModel?.getUsers() }
                         print(internalError)
                     case .noInternet:
                         self?.shouldNoInternetViewBePresented(true)
@@ -363,6 +364,12 @@ private extension MainViewController {
                 }
             }
         }
+    }
+    
+    func issueInternalErrorAlert(completionHandler: @escaping () -> Void) {
+        lazy var alertViewController = InternalErrorViewController(dismissCompletionHandler: completionHandler)
+        alertViewController.modalPresentationStyle = .fullScreen
+        present(alertViewController, animated: true)
     }
     
     func subscribeToNotifications() {
