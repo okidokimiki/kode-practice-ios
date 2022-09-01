@@ -10,7 +10,7 @@ final class MainViewController: BaseViewController<MainView> {
     
     // MARK: - Gestures
     
-    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(noInternerViewDidTap))
+    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapNoInternerView))
     
     // MARK: - Internal Properties
     
@@ -58,7 +58,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
 
 extension MainViewController: FilterDelegate {
     
-    func sortDidChange(by filter: FilterType) {
+    func didChangeFilter(by filter: FilterType) {
         viewModel?.filterType.value = filter
         
         selfView.userTableView.reloadData()
@@ -255,8 +255,8 @@ private extension MainViewController {
     }
     
     func setupTargets() {
-        selfView.refreshControl.addTarget(self, action: #selector(refreshControlDidScroll), for: .valueChanged)
-        selfView.searchBar.searchTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        selfView.refreshControl.addTarget(self, action: #selector(didScrollRefreshControl), for: .valueChanged)
+        selfView.searchBar.searchTextField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
     }
     
     func setupDelegates() {
@@ -366,7 +366,7 @@ private extension MainViewController {
     func subscribeToNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(connectivityStatusChanged),
+            selector: #selector(didChangeConnectivityStatus),
             name: NSNotification.Name.connectivityStatus,
             object: nil
         )
@@ -378,16 +378,16 @@ private extension MainViewController {
 @objc
 private extension MainViewController {
     
-    func textChanged(_ sender: UITextField) {
+    func didChangeText(_ sender: UITextField) {
         let image = sender.text?.count == .zero ? R.Images.SearchBar.leftImageNormal : R.Images.SearchBar.leftImageSelected
         sender.leftView = UIImageView.init(image: image)
     }
     
-    func refreshControlDidScroll(_ refreshControl: UIRefreshControl) {
+    func didScrollRefreshControl(_ refreshControl: UIRefreshControl) {
         viewModel?.getUsers()
     }
     
-    func connectivityStatusChanged(_ notification: Notification) {
+    func didChangeConnectivityStatus(_ notification: Notification) {
         if NetworkMonitor.shared.isConnected {
             viewModel?.networkState.value = .default
         } else {
@@ -395,7 +395,7 @@ private extension MainViewController {
         }
     }
     
-    func noInternerViewDidTap(_ sender: UITapGestureRecognizer) {
+    func didTapNoInternerView(_ sender: UITapGestureRecognizer) {
         shouldNoInternetViewBePresented(false)
     }
 }
