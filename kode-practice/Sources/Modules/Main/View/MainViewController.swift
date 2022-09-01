@@ -59,7 +59,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
 extension MainViewController: FilterDelegate {
     
     func sortDidChange(by filter: FilterType) {
-        viewModel?.filteredBy.value = filter
+        viewModel?.filterType.value = filter
         
         selfView.userTableView.reloadData()
         selfView.searchBar.text = ""
@@ -96,7 +96,7 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         guard let viewModel = viewModel else { return }
-        filterViewController.viewModel = .init(selectedFiltered: viewModel.filteredBy)
+        filterViewController.viewModel = .init(selectedFiltered: viewModel.filterType)
         present(filterViewController, animated: true)
     }
 }
@@ -163,7 +163,7 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let detailsViewModel: DetailsViewModel
-        switch viewModel.filteredBy.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             detailsViewModel = .init(viewModel.filteredByAlphabetUsers[indexPath.item])
         case .byBirthday:
@@ -192,7 +192,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let viewModel = viewModel, let userCell = cell as? UserTableViewCell else { return }
         
-        switch viewModel.filteredBy.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             userCell.shouldBirthdayDateHide(true)
         case .byBirthday:
@@ -208,7 +208,7 @@ extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let viewModel = viewModel else { return .zero }
         
-        switch viewModel.filteredBy.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             return .one
         case .byBirthday:
@@ -221,7 +221,7 @@ extension MainViewController: UITableViewDataSource {
             return Constants.skeletonTableViewCellCount
         }
         
-        switch viewModel.filteredBy.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             return viewModel.filteredByAlphabetUsers.count
         case .byBirthday:
@@ -234,7 +234,7 @@ extension MainViewController: UITableViewDataSource {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
-        switch viewModel.filteredBy.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             userCell.configure(with: viewModel.filteredByAlphabetUsers[indexPath.item])
         case .byBirthday:
