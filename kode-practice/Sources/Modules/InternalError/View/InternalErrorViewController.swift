@@ -17,7 +17,7 @@ final class InternalErrorViewController: BaseViewController<InternalErrorView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTargets()
+        setupTargets()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -30,8 +30,8 @@ final class InternalErrorViewController: BaseViewController<InternalErrorView> {
 
 private extension InternalErrorViewController {
     
-    func setTargets() {
-        selfView.tryAgainButton.addTarget(self, action: #selector(dismissAlert), for: .touchUpInside)
+    func setupTargets() {
+        selfView.tryAgainButton.addTarget(self, action: #selector(didDismissAlert), for: .touchUpInside)
     }
 }
 
@@ -40,7 +40,7 @@ private extension InternalErrorViewController {
 @objc
 private extension InternalErrorViewController {
     
-    func dismissAlert() {
+    func didDismissAlert() {
         dismiss(animated: true)
     }
 }

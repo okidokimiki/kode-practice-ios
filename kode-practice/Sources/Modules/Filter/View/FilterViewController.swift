@@ -1,7 +1,7 @@
 import UIKit
 
 protocol FilterDelegate: AnyObject {
-    func sortDidChange(by filter: FilterType)
+    func didChangeFilter(by filter: FilterType)
 }
 
 final class FilterViewController: BaseViewController<FilterView> {
@@ -53,8 +53,8 @@ private extension FilterViewController {
     }
     
     func setupTargets() {
-        selfView.byAlphabetRadioButton.addTarget(self, action: #selector(alphabetRadioButtonDidTap), for: .touchUpInside)
-        selfView.byBirthdayRadioButton.addTarget(self, action: #selector(birthdayRadioButtonDidTap), for: .touchUpInside)
+        selfView.byAlphabetRadioButton.addTarget(self, action: #selector(didTapAlphabetRadioButton), for: .touchUpInside)
+        selfView.byBirthdayRadioButton.addTarget(self, action: #selector(didTapBirthdayRadioButton), for: .touchUpInside)
     }
     
     func setupBindings() {
@@ -76,14 +76,14 @@ private extension FilterViewController {
 @objc
 private extension FilterViewController {
     
-    func alphabetRadioButtonDidTap() {
+    func didTapAlphabetRadioButton() {
         viewModel?.selectedFiltered.value = .byAlphabet
-        delegate?.sortDidChange(by: .byAlphabet)
+        delegate?.didChangeFilter(by: .byAlphabet)
         
     }
     
-    func birthdayRadioButtonDidTap() {
+    func didTapBirthdayRadioButton() {
         viewModel?.selectedFiltered.value = .byBirthday
-        delegate?.sortDidChange(by: .byBirthday)
+        delegate?.didChangeFilter(by: .byBirthday)
     }
 }
