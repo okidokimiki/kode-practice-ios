@@ -27,14 +27,14 @@ private extension DetailsViewModel {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.dateFormat = "d MMMM yyyy"
-
+        
         return dateFormatter
             .string(from: birthdayDate)
     }
     
     var age: Int? {
         guard let birthdayDate = user.birthdayDate else { return nil }
-
+        
         return Calendar.current.dateComponents([.year], from: birthdayDate, to: Date()).year ?? nil
     }
     

@@ -24,7 +24,7 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTargets()
@@ -80,7 +80,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel?.getSearchedUsers(by: searchText)
     }
-        
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }

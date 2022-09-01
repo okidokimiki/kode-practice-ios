@@ -62,7 +62,7 @@ extension InternalErrorView {
         
         return label
     }
-
+    
     static func makeLabel(text: String, font: UIFont, textColor: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text

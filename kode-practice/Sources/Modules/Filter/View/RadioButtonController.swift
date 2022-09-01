@@ -9,7 +9,7 @@ class RadioButtonController: NSObject {
     var defaultButton: RadioButton? {
         didSet { buttonArrayUpdated(buttonSelected: self.defaultButton) }
     }
-
+    
     func buttonArrayUpdated(buttonSelected: RadioButton?) {
         guard let buttonsArray = buttonsArray else { return }
         

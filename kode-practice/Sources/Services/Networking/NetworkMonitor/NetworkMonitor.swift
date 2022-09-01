@@ -22,17 +22,17 @@ extension NWInterface.InterfaceType: CaseIterable {
 final class NetworkMonitor {
     
     static let shared = NetworkMonitor()
-
+    
     private let queue = DispatchQueue(label: "NetworkConnectivityMonitor")
     private let monitor: NWPathMonitor
-
+    
     private(set) var isConnected = false
     private(set) var currentConnectionType: NWInterface.InterfaceType?
-
+    
     private init() {
         monitor = NWPathMonitor()
     }
-
+    
     func startMonitoring() {
         monitor.pathUpdateHandler = { [weak self] path in
             self?.isConnected = path.status != .unsatisfied
@@ -42,7 +42,7 @@ final class NetworkMonitor {
         }
         monitor.start(queue: queue)
     }
-
+    
     func stopMonitoring() {
         monitor.cancel()
     }
