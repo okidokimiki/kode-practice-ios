@@ -3,18 +3,6 @@ import SnapKit
 
 final class UserHeaderView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let lineHeight: CGFloat = 1
-        enum YearLabel {
-            static let yearTextFont = R.Fonts.interMedium(with: 16)
-            static let leftOrRightInset: CGFloat = 24
-            static let width: CGFloat = 160
-            static let nextYearText = "\(Calendar(identifier: .gregorian).dateComponents([.year], from: Date()).year! + .one)"
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var yearLabel = UserHeaderView.makeYearLabel()
@@ -67,5 +55,17 @@ extension UserHeaderView {
         view.backgroundColor = R.Colors.separator
         
         return view
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let lineHeight: CGFloat = 1
+    enum YearLabel {
+        static let yearTextFont = R.Fonts.interMedium(with: 16)
+        static let leftOrRightInset: CGFloat = 24
+        static let width: CGFloat = 160
+        static let nextYearText = "\(Calendar(identifier: .gregorian).dateComponents([.year], from: Date()).year! + .one)"
     }
 }

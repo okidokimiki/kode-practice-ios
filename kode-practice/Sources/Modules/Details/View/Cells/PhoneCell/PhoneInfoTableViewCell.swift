@@ -3,25 +3,6 @@ import SnapKit
 
 final class PhoneInfoTableViewCell: UITableViewCell {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        enum IconImageView {
-            static let height: CGFloat = 20
-            static let leftOffset: CGFloat = 16
-        }
-        
-        enum PhoneNumberLabel {
-            static let textFont = R.Fonts.interMedium(with: 16)
-            static let leftOffset: CGFloat = 14
-        }
-        
-        enum SeparatorView {
-            static let leftOrRightInset: CGFloat = 14
-            static let height: CGFloat = 0.5
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var separator = DateInfoTableViewCell.makeSeparator()
@@ -85,5 +66,24 @@ extension PhoneInfoTableViewCell {
         label.font = Constants.PhoneNumberLabel.textFont
         
         return label
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    enum IconImageView {
+        static let height: CGFloat = 20
+        static let leftOffset: CGFloat = 16
+    }
+    
+    enum PhoneNumberLabel {
+        static let textFont = R.Fonts.interMedium(with: 16)
+        static let leftOffset: CGFloat = 14
+    }
+    
+    enum SeparatorView {
+        static let leftOrRightInset: CGFloat = 14
+        static let height: CGFloat = 0.5
     }
 }

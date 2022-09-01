@@ -2,27 +2,6 @@ import UIKit
 
 final class SearchBar: UISearchBar {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let cornerRadius: CGFloat = 16
-        static let activeTextFont: UIFont = R.Fonts.interRegular(with: 15)
-        static let adjustingTextOffset: UIOffset = .init(horizontal: 10, vertical: .zero)
-        static let adjustingRightIconOffset: UIOffset = .init(horizontal: -10, vertical: .zero)
-        static let placeholderAttributes: [NSAttributedString.Key: Any] = [
-            .font: R.Fonts.interMedium(with: 15),
-            .foregroundColor: R.Colors.SearchBar.placeholder,
-        ]
-        static let cancelBarButtonAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 15),
-            .foregroundColor: R.Colors.activePrimary,
-        ]
-        static let placeholderAttributedString: NSAttributedString = .init(
-            string: R.Strings.SearchBar.placeholder.localizedString,
-            attributes: placeholderAttributes
-        )
-    }
-    
     // MARK: - UISearchBar
     
     convenience init() {
@@ -73,4 +52,25 @@ private extension SearchBar {
         let barButtonAppearance = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
         barButtonAppearance.setTitleTextAttributes(Constants.cancelBarButtonAttributes, for: .normal)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let cornerRadius: CGFloat = 16
+    static let activeTextFont: UIFont = R.Fonts.interRegular(with: 15)
+    static let adjustingTextOffset: UIOffset = .init(horizontal: 10, vertical: .zero)
+    static let adjustingRightIconOffset: UIOffset = .init(horizontal: -10, vertical: .zero)
+    static let placeholderAttributes: [NSAttributedString.Key: Any] = [
+        .font: R.Fonts.interMedium(with: 15),
+        .foregroundColor: R.Colors.SearchBar.placeholder,
+    ]
+    static let cancelBarButtonAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.boldSystemFont(ofSize: 15),
+        .foregroundColor: R.Colors.activePrimary,
+    ]
+    static let placeholderAttributedString: NSAttributedString = .init(
+        string: R.Strings.SearchBar.placeholder.localizedString,
+        attributes: placeholderAttributes
+    )
 }

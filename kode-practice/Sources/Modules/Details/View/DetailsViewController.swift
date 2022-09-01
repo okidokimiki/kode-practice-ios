@@ -2,12 +2,6 @@ import UIKit
 
 final class DetailsViewController: BaseViewController<DetailsView> {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let rowCellHeight: CGFloat = 60
-    }
-    
     // MARK: - Views
     
     lazy var backBarButton = BackBarButtonItem(target: navigationController ?? UINavigationController())
@@ -139,4 +133,10 @@ private extension DetailsViewController {
             }
         }
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let rowCellHeight: CGFloat = 60
 }

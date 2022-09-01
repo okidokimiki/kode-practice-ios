@@ -3,35 +3,6 @@ import SnapKit
 
 final class FilterView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        enum Separator {
-            static let frame: CGRect = .init(x: .zero, y: .zero, width: 56, height: 4)
-            static let topInset: CGFloat = 8
-            static let height: CGFloat = 4
-            static let width: CGFloat = 56
-        }
-        
-        enum TitleLabel {
-            static let textFont = R.Fonts.interSemiBold(with: 20)
-            static let topOffset: CGFloat = 24
-        }
-        
-        enum FilterTypeLabel {
-            static let textFont = R.Fonts.interMedium(with: 16)
-        }
-        
-        enum RadioButton {
-            static let width: CGFloat = 21
-            static let leftOffset: CGFloat = 18
-            static let labelLeftOffset: CGFloat = 14
-            static let byAlphabetTopOffset: CGFloat = 35
-            static let byBirthdayTopOffset: CGFloat = 40
-        }
-        
-    }
-    
     // MARK: - Views
     
     private lazy var separator = FilterView.makeSeparator()
@@ -121,4 +92,33 @@ extension FilterView {
         
         return label
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    enum Separator {
+        static let frame: CGRect = .init(x: .zero, y: .zero, width: 56, height: 4)
+        static let topInset: CGFloat = 8
+        static let height: CGFloat = 4
+        static let width: CGFloat = 56
+    }
+    
+    enum TitleLabel {
+        static let textFont = R.Fonts.interSemiBold(with: 20)
+        static let topOffset: CGFloat = 24
+    }
+    
+    enum FilterTypeLabel {
+        static let textFont = R.Fonts.interMedium(with: 16)
+    }
+    
+    enum RadioButton {
+        static let width: CGFloat = 21
+        static let leftOffset: CGFloat = 18
+        static let labelLeftOffset: CGFloat = 14
+        static let byAlphabetTopOffset: CGFloat = 35
+        static let byBirthdayTopOffset: CGFloat = 40
+    }
+    
 }
