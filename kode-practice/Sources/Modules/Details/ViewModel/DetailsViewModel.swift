@@ -5,15 +5,13 @@ struct DetailsViewModel {
     // MARK: - Internal Properties
     
     let user: UserTableViewCellModel
-    var dateInfo: Observable<DateInfoTableViewCellModel?> = Observable(nil)
-    let phoneInfo: Observable<PhoneInfoTableViewCellModel?> = Observable(nil)
+    let userInfo: Observable<InfoTableViewCellModel?> = Observable(nil)
     
     // MARK: - Initilization
     
     init(_ user: UserTableViewCellModel) {
         self.user = user
-        dateInfo.value = .init(birthday: birthday, age: age)
-        phoneInfo.value = .init(phoneNumber: phoneNumber)
+        self.userInfo.value = .init(phoneNumber: phoneNumber, birthday: birthday, age: age)
     }
 }
 
