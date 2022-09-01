@@ -16,7 +16,7 @@ struct MainViewModel {
     var tabs: Observable<[TabCollectionViewCellModel]> = Observable([])
     
     var searchState: Observable<SearchState> = Observable(.default)
-    var filteredBy: Observable<FilterType> = Observable(.byAlphabet)
+    var filterType: Observable<FilterType> = Observable(.byAlphabet)
     var networkState: Observable<NetworkState> = Observable(.default)
     
     var users: Observable<[UserTableViewCellModel]> = Observable([])
