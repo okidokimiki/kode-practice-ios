@@ -57,7 +57,7 @@ final class UserTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         avatarImageView.image = nil
     }
-        
+    
     func configure(with model: UserTableViewCellModel) {
         birthdayDateLabel.text = model.shortFormatBirthday
         avatarImageView.loadImage(from: model.logoUrl)

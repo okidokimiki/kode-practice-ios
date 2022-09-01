@@ -21,7 +21,7 @@ struct UserTableViewCellModel {
 extension UserTableViewCellModel {
     var shortFormatBirthday: String? {
         guard let birthdayDate = birthdayDate else { return nil }
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         
@@ -34,7 +34,7 @@ extension UserTableViewCellModel {
             .string(from: birthdayDate)
             .prefix(3)
             .replacingOccurrences(of: ".", with: "")
-
+        
         return "\(day) \(month)"
     }
 }

@@ -12,7 +12,7 @@ final class UserTableView: UITableView {
     
     // MARK: - Delegate Properties
     
-     var touchedDelegate: UserTableViewTouchDelegate?
+    var touchedDelegate: UserTableViewTouchDelegate?
     
     // MARK: - UITableView
     
