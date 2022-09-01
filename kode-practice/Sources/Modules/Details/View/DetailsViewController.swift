@@ -27,7 +27,6 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
-        setupBindings()
         
         selfView.configure(with: viewModel?.user)
     }
@@ -78,23 +77,18 @@ extension DetailsViewController: UITableViewDelegate {
 
 extension DetailsViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { .two }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        InfoCellType.allCases.count
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let noneCell = UITableViewCell(style: .default, reuseIdentifier: String(describing: UITableViewCell.self))
-        let dateCell = tableView.dequeueCell(cellType: DateInfoTableViewCell.self)
-        let phoneCell = tableView.dequeueCell(cellType: PhoneInfoTableViewCell.self)
-        guard let viewModel = viewModel else { return noneCell }
+        let infoCell = tableView.dequeueCell(cellType: InfoTableViewCell.self)
+        guard let viewModel = viewModel else { return infoCell }
         
-        switch indexPath.item {
-        case .zero:
-            dateCell.configure(with: viewModel.dateInfo.value)
-            return dateCell
-        case .one:
-            phoneCell.configure(with: viewModel.phoneInfo.value)
-            return phoneCell
-        default: return noneCell
-        }
+        let cellType: InfoCellType = indexPath.item == .zero ? .date : .phone
+        infoCell.configure(by: cellType, with: viewModel.userInfo.value)
+        
+        return infoCell
     }
 }
 
@@ -116,22 +110,6 @@ private extension DetailsViewController {
               let url = URL(string: "telprompt://+7\(phoneNumber)"),
               UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
-    func setupBindings() {
-        guard let viewModel = viewModel else { return }
-        
-        viewModel.dateInfo.observe { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.selfView.infoTableView.reloadRows(at: [IndexPath(item: .one, section: .zero)], with: .none)
-            }
-        }
-        
-        viewModel.phoneInfo.observe { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.selfView.infoTableView.reloadRows(at: [IndexPath(item: .two, section: .zero)], with: .none)
-            }
-        }
     }
 }
 
