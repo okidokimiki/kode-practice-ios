@@ -3,27 +3,6 @@ import SnapKit
 
 final class InternalErrorView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let emojiTextFont: UIFont = .systemFont(ofSize: 50)
-        static let titleTextFont = R.Fonts.interSemiBold(with: 17)
-        static let messageTextFont = R.Fonts.interRegular(with: 16)
-        static let tryAgainButtonAttributes: [NSAttributedString.Key: Any] = [
-            .font: R.Fonts.interSemiBold(with: 16),
-            .foregroundColor: R.Colors.activePrimary,
-        ]
-        static let tryAgainButtonAttributedString = NSAttributedString(
-            string: R.Strings.Alert.tryAgain.localizedString,
-            attributes: tryAgainButtonAttributes
-        )
-        
-        enum Labels {
-            static let leftOrRightInset: CGFloat = 16
-            static let topOffset: CGFloat = 12
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var titleLabel = InternalErrorView.makeLabel(
@@ -99,5 +78,26 @@ extension InternalErrorView {
         button.setAttributedTitle(Constants.tryAgainButtonAttributedString, for: .normal)
         
         return button
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let emojiTextFont: UIFont = .systemFont(ofSize: 50)
+    static let titleTextFont = R.Fonts.interSemiBold(with: 17)
+    static let messageTextFont = R.Fonts.interRegular(with: 16)
+    static let tryAgainButtonAttributes: [NSAttributedString.Key: Any] = [
+        .font: R.Fonts.interSemiBold(with: 16),
+        .foregroundColor: R.Colors.activePrimary,
+    ]
+    static let tryAgainButtonAttributedString = NSAttributedString(
+        string: R.Strings.Alert.tryAgain.localizedString,
+        attributes: tryAgainButtonAttributes
+    )
+    
+    enum Labels {
+        static let leftOrRightInset: CGFloat = 16
+        static let topOffset: CGFloat = 12
     }
 }

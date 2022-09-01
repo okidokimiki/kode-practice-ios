@@ -6,12 +6,6 @@ protocol UserTableViewTouchDelegate {
 
 final class UserTableView: UITableView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: -16)
-    }
-    
     // MARK: - Internal Properties
     
     private var refreshController: UIRefreshControl?
@@ -60,4 +54,10 @@ private extension UserTableView {
     func registerCells() {
         register(UserTableViewCell.self)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: -16)
 }

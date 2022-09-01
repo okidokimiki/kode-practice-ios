@@ -2,14 +2,6 @@ import UIKit
 
 final class RadioButton: UIButton {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let frame: CGRect = .init(x: .zero, y: .zero, width: 21, height: 21)
-        static let defaultBorderWidth: CGFloat = 2
-        static let selectedBorderWidth: CGFloat = 6.5
-    }
-    
     // MARK: - Override Properties
     
     override var isSelected: Bool {
@@ -45,4 +37,12 @@ private extension RadioButton {
     func updateAppearance() {
         layer.borderWidth = isSelected ? Constants.selectedBorderWidth : Constants.defaultBorderWidth
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let frame: CGRect = .init(x: .zero, y: .zero, width: 21, height: 21)
+    static let defaultBorderWidth: CGFloat = 2
+    static let selectedBorderWidth: CGFloat = 6.5
 }

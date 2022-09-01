@@ -3,15 +3,6 @@ import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let skeletonTableViewCellCount: Int = 12
-        static let rowCellHeight: CGFloat = 84
-        static let headerViewHeight: CGFloat = 68
-        static let noInternetInitialHeight: CGFloat = 0
-    }
-    
     // MARK: - Views
     
     private lazy var noInternetView = NoInternetView()
@@ -407,4 +398,13 @@ private extension MainViewController {
     func noInternerViewDidTap(_ sender: UITapGestureRecognizer) {
         shouldNoInternetViewBePresented(false)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let skeletonTableViewCellCount: Int = 12
+    static let rowCellHeight: CGFloat = 84
+    static let headerViewHeight: CGFloat = 68
+    static let noInternetInitialHeight: CGFloat = 0
 }

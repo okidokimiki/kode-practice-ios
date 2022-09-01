@@ -3,28 +3,6 @@ import SnapKit
 
 final class DateInfoTableViewCell: UITableViewCell {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        enum IconImageView {
-            static let height: CGFloat = 20
-            static let leftOffset: CGFloat = 16
-        }
-        
-        enum DateLabel {
-            static let leftOffset: CGFloat = 14
-        }
-        
-        enum AgeLabelLabel {
-            static let rightInset: CGFloat = 14
-        }
-        
-        enum SeparatorView {
-            static let leftOrRightInset: CGFloat = 14
-            static let height: CGFloat = 0.5
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var separator = DateInfoTableViewCell.makeSeparator()
@@ -123,5 +101,27 @@ extension DateInfoTableViewCell {
         view.backgroundColor = R.Colors.detailsBackground
         
         return view
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    enum IconImageView {
+        static let height: CGFloat = 20
+        static let leftOffset: CGFloat = 16
+    }
+    
+    enum DateLabel {
+        static let leftOffset: CGFloat = 14
+    }
+    
+    enum AgeLabelLabel {
+        static let rightInset: CGFloat = 14
+    }
+    
+    enum SeparatorView {
+        static let leftOrRightInset: CGFloat = 14
+        static let height: CGFloat = 0.5
     }
 }

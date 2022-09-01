@@ -3,13 +3,6 @@ import SnapKit
 
 final class TabCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let tabTitleTextFont = R.Fonts.interSemiBold(with: 15)
-        static let selectedTabIndicatorHeight: CGFloat = 2
-    }
-    
     // MARK: - Views
     
     private lazy var tabTitleLabel = TabCollectionViewCell.makeTabTitleLabel()
@@ -72,4 +65,11 @@ extension TabCollectionViewCell {
         
         return label
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let tabTitleTextFont = R.Fonts.interSemiBold(with: 15)
+    static let selectedTabIndicatorHeight: CGFloat = 2
 }
