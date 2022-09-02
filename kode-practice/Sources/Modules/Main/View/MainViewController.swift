@@ -10,7 +10,7 @@ final class MainViewController: BaseViewController<MainView> {
     
     // MARK: - Gestures
     
-    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapNoInternerView))
+    private lazy var hideNoInternetOnTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapNoInternerView))
     
     // MARK: - Internal Properties
     
@@ -53,7 +53,7 @@ final class MainViewController: BaseViewController<MainView> {
 extension MainViewController: UIGestureRecognizerDelegate {
     
     func setupGestureRecognizerDelegates() {
-        noInternetTapGesture.delegate = self
+        hideNoInternetOnTapGesture.delegate = self
     }
 }
 
@@ -274,7 +274,7 @@ private extension MainViewController {
     }
     
     func setupNoInternetView() {
-        noInternetView.addGestureRecognizer(noInternetTapGesture)
+        noInternetView.addGestureRecognizer(hideNoInternetOnTapGesture)
         
         navigationController?.view.addSubview(noInternetView)
         noInternetView.snp.makeConstraints { make in
