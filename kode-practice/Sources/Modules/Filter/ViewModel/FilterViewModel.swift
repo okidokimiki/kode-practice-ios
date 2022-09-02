@@ -1,5 +1,5 @@
 import Foundation
 
 struct FilterViewModel {
-    var selectedFiltered: Observable<FilterType>
+    var filterType: Observable<FilterType>
 }

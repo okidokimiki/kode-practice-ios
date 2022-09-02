@@ -29,9 +29,8 @@ final class FilterViewController: BaseViewController<FilterView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        binding()
         setupTargets()
-        setupBindings()
-        
         configureRadioController()
     }
 }
@@ -44,7 +43,7 @@ private extension FilterViewController {
         guard let viewModel = viewModel else { return }
         
         radioController.buttonsArray = [selfView.byAlphabetRadioButton, selfView.byBirthdayRadioButton]
-        switch viewModel.selectedFiltered.value {
+        switch viewModel.filterType.value {
         case .byAlphabet:
             radioController.defaultButton = selfView.byAlphabetRadioButton
         case .byBirthday:
@@ -57,10 +56,10 @@ private extension FilterViewController {
         selfView.byBirthdayRadioButton.addTarget(self, action: #selector(didTapBirthdayRadioButton), for: .touchUpInside)
     }
     
-    func setupBindings() {
-        viewModel?.selectedFiltered.observe { [weak self] filterBy in
+    func binding() {
+        viewModel?.filterType.observe { [weak self] type in
             DispatchQueue.main.async {
-                switch filterBy {
+                switch type {
                 case .byAlphabet:
                     self?.radioController.buttonArrayUpdated(buttonSelected: self?.selfView.byAlphabetRadioButton)
                 case .byBirthday:
@@ -77,13 +76,13 @@ private extension FilterViewController {
 private extension FilterViewController {
     
     func didTapAlphabetRadioButton() {
-        viewModel?.selectedFiltered.value = .byAlphabet
+        viewModel?.filterType.value = .byAlphabet
         delegate?.didChangeFilter(by: .byAlphabet)
         
     }
     
     func didTapBirthdayRadioButton() {
-        viewModel?.selectedFiltered.value = .byBirthday
+        viewModel?.filterType.value = .byBirthday
         delegate?.didChangeFilter(by: .byBirthday)
     }
 }

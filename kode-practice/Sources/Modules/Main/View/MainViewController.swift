@@ -32,8 +32,8 @@ final class MainViewController: BaseViewController<MainView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        binding()
         setupTargets()
-        setupBindings()
         setupDelegates()
         setupNoInternetView()
         setupGestureRecognizerDelegates()
@@ -99,7 +99,7 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         guard let viewModel = viewModel else { return }
-        filterViewController.viewModel = .init(selectedFiltered: viewModel.filterType)
+        filterViewController.viewModel = .init(filterType: viewModel.filterType)
         present(filterViewController, animated: true)
     }
 }
@@ -263,7 +263,7 @@ private extension MainViewController {
         selfView.tabsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
-    func setupBindings() {
+    func binding() {
         viewModel?.users.observe { _ in
             DispatchQueue.main.async {
                 self.viewModel?.getDepartmentUsers(of: Department.allCases[self.viewModel?.selectedTabNumber ?? .zero])
