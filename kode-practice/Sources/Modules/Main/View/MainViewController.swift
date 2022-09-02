@@ -121,14 +121,14 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return .zero }
         
-        return viewModel.tabs.value.count
+        return viewModel.getTabItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tabCell = collectionView.dequeueCell(cellType: TabCollectionViewCell.self, for: indexPath)
         guard let viewModel = viewModel else { return tabCell }
         
-        tabCell.configure(with: viewModel.tabs.value[indexPath.item].title)
+        tabCell.configure(with: viewModel.getTabTitleForCell(with: indexPath))
         
         return tabCell
     }
@@ -165,18 +165,7 @@ extension MainViewController: UITableViewDelegate {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return }
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let detailsViewModel: DetailsViewModel
-        switch viewModel.filterType.value {
-        case .byAlphabet:
-            detailsViewModel = .init(viewModel.filteredByAlphabetUsers[indexPath.item])
-        case .byBirthday:
-            if indexPath.section == .zero {
-                detailsViewModel = .init(viewModel.filteredByHappyBirthdayThisYearUsers[indexPath.item])
-            } else {
-                detailsViewModel = .init(viewModel.filteredByHappyBirthdayNextYearUsers[indexPath.item])
-            }
-        }
-        
+        let detailsViewModel = DetailsViewModel.init(viewModel.getUserCellModel(with: indexPath))
         navigationController?.pushViewController(DetailsViewController(viewModel: detailsViewModel), animated: true)
     }
     
@@ -211,12 +200,7 @@ extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let viewModel = viewModel else { return .zero }
         
-        switch viewModel.filterType.value {
-        case .byAlphabet:
-            return .one
-        case .byBirthday:
-            return .two
-        }
+        return viewModel.getNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -224,12 +208,7 @@ extension MainViewController: UITableViewDataSource {
             return Constants.skeletonTableViewCellCount
         }
         
-        switch viewModel.filterType.value {
-        case .byAlphabet:
-            return viewModel.filteredByAlphabetUsers.count
-        case .byBirthday:
-            return section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers.count : viewModel.filteredByHappyBirthdayNextYearUsers.count
-        }
+        return viewModel.getNumberOfRowsInSection(of: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -237,13 +216,7 @@ extension MainViewController: UITableViewDataSource {
         guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
-        switch viewModel.filterType.value {
-        case .byAlphabet:
-            userCell.configure(with: viewModel.filteredByAlphabetUsers[indexPath.item])
-        case .byBirthday:
-            let models = indexPath.section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers : viewModel.filteredByHappyBirthdayNextYearUsers
-            userCell.configure(with: models[indexPath.item])
-        }
+        userCell.configure(with: viewModel.getUserCellModel(with: indexPath))
         
         return userCell
     }

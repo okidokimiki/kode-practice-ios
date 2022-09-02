@@ -5,13 +5,19 @@ struct DetailsViewModel {
     // MARK: - Internal Properties
     
     let user: UserTableViewCellModel
-    let userInfo: Observable<InfoTableViewCellModel?> = Observable(nil)
     
     // MARK: - Initilization
     
     init(_ user: UserTableViewCellModel) {
         self.user = user
-        self.userInfo.value = .init(phoneNumber: phoneNumber, birthday: birthday, age: age)
+    }
+    
+    // MARK: - Public Methods
+    
+    func getInfoCellModel(with indexPath: IndexPath) -> InfoTableViewCellModel? {
+        let cellType: InfoCellType = indexPath.item == .zero ? .date : .phone
+        
+        return InfoTableViewCellModel(cellType: cellType, phoneNumber: phoneNumber, birthday: birthday, age: age)
     }
 }
 

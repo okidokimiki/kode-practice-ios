@@ -85,8 +85,7 @@ extension DetailsViewController: UITableViewDataSource {
         let infoCell = tableView.dequeueCell(cellType: InfoTableViewCell.self)
         guard let viewModel = viewModel else { return infoCell }
         
-        let cellType: InfoCellType = indexPath.item == .zero ? .date : .phone
-        infoCell.configure(by: cellType, with: viewModel.userInfo.value)
+        infoCell.configure(with: viewModel.getInfoCellModel(with: indexPath))
         
         return infoCell
     }

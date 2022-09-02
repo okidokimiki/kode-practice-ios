@@ -35,10 +35,10 @@ final class InfoTableViewCell: UITableViewCell {
     
     // MARK: - ConfigurePerCell
     
-    func configure(by type: InfoCellType, with model: InfoTableViewCellModel?) {
+    func configure(with model: InfoTableViewCellModel?) {
         guard let model = model, let age = model.age else { return }
         
-        switch type {
+        switch model.cellType {
         case .date:
             // TODO: Next time use `stringdict` for pluralization
             let wordAge = Locale.current.languageCode == "ru" ? age.ruWordAge() : "year"
