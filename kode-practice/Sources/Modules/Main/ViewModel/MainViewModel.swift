@@ -91,6 +91,37 @@ struct MainViewModel {
         }
     }
     
+    func getTabItemsInSection() -> Int {
+        tabs.value.count
+    }
+    
+    func getTabTitleForCell(with indexPath: IndexPath) -> String {
+        tabs.value[indexPath.item].title
+    }
+    
+    func getNumberOfSections() -> Int {
+        filterType.value.rawValue
+    }
+    
+    func getNumberOfRowsInSection(of section: Int) -> Int {
+        switch filterType.value {
+        case .byAlphabet:
+            return filteredByAlphabetUsers.count
+        case .byBirthday:
+            return section == .zero ? filteredByHappyBirthdayThisYearUsers.count : filteredByHappyBirthdayNextYearUsers.count
+        }
+    }
+    
+    func getUserCellModel(with indexPath: IndexPath) -> UserTableViewCellModel {
+        switch filterType.value {
+        case .byAlphabet:
+            return filteredByAlphabetUsers[indexPath.item]
+        case .byBirthday:
+            let model = indexPath.section == .zero ? filteredByHappyBirthdayThisYearUsers : filteredByHappyBirthdayNextYearUsers
+            return model[indexPath.item]
+        }
+    }
+    
     // MARK: - NetworkState
     
     enum NetworkState {

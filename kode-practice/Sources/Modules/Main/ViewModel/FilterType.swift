@@ -1,13 +1,4 @@
-enum FilterType: String {
-    case byAlphabet
+enum FilterType: Int {
+    case byAlphabet = 1
     case byBirthday
-    
-    mutating func toggle() {
-        switch self {
-        case .byAlphabet:
-            self = .byBirthday
-        case .byBirthday:
-            self = .byAlphabet
-        }
-    }
 }
