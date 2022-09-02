@@ -20,17 +20,14 @@ final class UserTableViewCell: UITableViewCell {
     
     private lazy var fullNameLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.active,
-        textAlignment: .left,
         font: Constants.FullNameLabel.textFont
     )
     private lazy var tagLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.inActive,
-        textAlignment: .left,
         font: Constants.TagLabel.textFont
     )
     private lazy var departmentLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.secondary,
-        textAlignment: .left,
         font: Constants.DepartmentLabel.textFont
     )
     private lazy var birthdayDateLabel = UserTableViewCell.makeLabel(
@@ -166,7 +163,7 @@ extension UserTableViewCell {
         return imageView
     }
     
-    static func makeLabel(textColor: UIColor, textAlignment: NSTextAlignment, font: UIFont) -> UILabel {
+    static func makeLabel(textColor: UIColor, textAlignment: NSTextAlignment = .left, font: UIFont) -> UILabel {
         let label = UILabel()
         label.numberOfLines = .zero
         label.layer.masksToBounds = true
