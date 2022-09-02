@@ -335,20 +335,13 @@ private extension MainViewController {
     }
     
     func shouldNoInternetViewBePresented(_ shouldPresenet: Bool) {
-        var topBarHeight: CGFloat {
-            var top = self.navigationController?.navigationBar.frame.height ?? .zero
-            top += UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? .zero
-            
-            return top
-        }
-        
-        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? topBarHeight : .zero) }
+        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? navigationBarbarContentStart : .zero) }
         
         noInternetView.setNeedsUpdateConstraints()
         UIView.animate(withDuration: 0.5) { self.noInternetView.layoutIfNeeded() } completion: { done in
             if done {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    guard self.noInternetView.frame.height != topBarHeight else {
+                    guard self.noInternetView.frame.height != self.navigationBarbarContentStart else {
                         self.shouldNoInternetViewBePresented(false)
                         return
                     }
