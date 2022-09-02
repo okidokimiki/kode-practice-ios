@@ -21,6 +21,11 @@ final class MainViewController: BaseViewController<MainView> {
     convenience init(viewModel: MainViewModel) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        subscribeToNotifications()
+    }
+    
+    deinit {
+        unsubscribeFromAllNotifications()
     }
     
     // MARK: - Lifecycle
@@ -32,8 +37,6 @@ final class MainViewController: BaseViewController<MainView> {
         setupDelegates()
         setupNoInternetView()
         setupGestureRecognizerDelegates()
-        
-        subscribeToNotifications()
         
         viewModel?.getTabs()
         viewModel?.getUsers()
@@ -363,6 +366,10 @@ private extension MainViewController {
             name: NSNotification.Name.connectivityStatus,
             object: nil
         )
+    }
+    
+    func unsubscribeFromAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
 
