@@ -66,6 +66,6 @@ private enum Constants {
         static let yearTextFont = R.Fonts.interMedium(with: 16)
         static let leftOrRightInset: CGFloat = 24
         static let width: CGFloat = 160
-        static let nextYearText = "\(Calendar(identifier: .gregorian).dateComponents([.year], from: Date()).year! + .one)"
+        static let nextYearText = "\(Calendar(identifier: .gregorian).dateComponents([.year], from: Date()).year! + 1)"
     }
 }
