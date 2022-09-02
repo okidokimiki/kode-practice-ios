@@ -15,9 +15,10 @@ struct DetailsViewModel {
     // MARK: - Public Methods
     
     func getInfoCellModel(with indexPath: IndexPath) -> InfoTableViewCellModel? {
-        let cellType: InfoCellType = indexPath.item == .zero ? .date : .phone
-        
-        return InfoTableViewCellModel(cellType: cellType, phoneNumber: phoneNumber, birthday: birthday, age: age)
+        .init(cellType: indexPath.item == .zero ? .date : .phone,
+              phoneNumber: phoneNumber,
+              birthday: birthday, age: age
+        )
     }
 }
 
