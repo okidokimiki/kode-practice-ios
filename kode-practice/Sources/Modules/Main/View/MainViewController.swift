@@ -3,8 +3,8 @@ import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
-    typealias UserCell = UserTableViewCell
     typealias TabCell = TabCollectionViewCell
+    typealias UserCell = UserTableViewCell
     
     // MARK: - Views
     
@@ -130,7 +130,6 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tabCell = collectionView.dequeueCell(cellType: TabCell.self, for: indexPath)
-        
         tabCell.configure(with: viewModel.getTabTitleForCell(with: indexPath))
         
         return tabCell
@@ -313,7 +312,7 @@ private extension MainViewController {
     func shouldNoInternetViewBePresented(_ shouldPresenet: Bool) {
         noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? navigationBarbarContentStart : .zero) }
         
-        noInternetView.setNeedsUpdateConstraints()
+        noInternetView.setNeedsUpdateConstraints()        
         UIView.animate(withDuration: 0.5) { self.noInternetView.layoutIfNeeded() } completion: { done in
             if done {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

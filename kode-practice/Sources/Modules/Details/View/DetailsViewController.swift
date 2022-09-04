@@ -24,7 +24,7 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     }
     
     deinit {
-        self.swipeToPop(enable: false)
+        swipeToPop(enable: false)
     }
     
     // MARK: - Lifecycle
@@ -43,7 +43,7 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.swipeToPop(enable: true)
+        swipeToPop(enable: true)
     }
 }
 
@@ -88,7 +88,6 @@ extension DetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let infoCell = tableView.dequeueCell(cellType: InfoCell.self)
-        
         infoCell.configure(with: viewModel.getInfoCellModel(with: indexPath))
         
         return infoCell
