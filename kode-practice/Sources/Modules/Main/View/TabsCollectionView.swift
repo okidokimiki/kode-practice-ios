@@ -2,6 +2,8 @@ import UIKit
 
 final class TabsCollectionView: UICollectionView {
     
+    typealias TabCell = TabCollectionViewCell
+    
     // MARK: - UICollectionView
     
     convenience init() {
@@ -32,7 +34,7 @@ private extension TabsCollectionView {
     }
     
     func registerCells() {
-        register(TabCollectionViewCell.self)
+        register(TabCell.self)
     }
 }
 

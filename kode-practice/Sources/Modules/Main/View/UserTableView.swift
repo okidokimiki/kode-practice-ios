@@ -6,6 +6,8 @@ protocol UserTableViewTouchDelegate {
 
 final class UserTableView: UITableView {
     
+    typealias UserCell = UserTableViewCell
+    
     // MARK: - Internal Properties
     
     private var refreshController: UIRefreshControl?
@@ -52,7 +54,7 @@ private extension UserTableView {
     }
     
     func registerCells() {
-        register(UserTableViewCell.self)
+        register(UserCell.self)
     }
 }
 

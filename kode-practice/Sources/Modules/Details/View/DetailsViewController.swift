@@ -2,6 +2,8 @@ import UIKit
 
 final class DetailsViewController: BaseViewController<DetailsView> {
     
+    typealias InfoCell = InfoTableViewCell
+    
     // MARK: - Views
     
     lazy var backBarButton = BackBarButtonItem(target: navigationController ?? UINavigationController())
@@ -85,7 +87,7 @@ extension DetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let infoCell = tableView.dequeueCell(cellType: InfoTableViewCell.self)
+        let infoCell = tableView.dequeueCell(cellType: InfoCell.self)
         
         infoCell.configure(with: viewModel.getInfoCellModel(with: indexPath))
         

@@ -3,6 +3,9 @@ import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
+    typealias UserCell = UserTableViewCell
+    typealias TabCell = TabCollectionViewCell
+    
     // MARK: - Views
     
     private lazy var noInternetView = NoInternetView()
@@ -126,7 +129,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tabCell = collectionView.dequeueCell(cellType: TabCollectionViewCell.self, for: indexPath)
+        let tabCell = collectionView.dequeueCell(cellType: TabCell.self, for: indexPath)
         
         tabCell.configure(with: viewModel.getTabTitleForCell(with: indexPath))
         
@@ -182,7 +185,7 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let userCell = cell as? UserTableViewCell else { return }
+        guard let userCell = cell as? UserCell else { return }
         
         switch viewModel.filterType.value {
         case .byAlphabet:
@@ -210,7 +213,7 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let userCell = tableView.dequeueCell(cellType: UserTableViewCell.self)
+        let userCell = tableView.dequeueCell(cellType: UserCell.self)
         guard !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
