@@ -55,6 +55,14 @@ struct MainViewModel {
         UserDefaults.standard.set(tabNumber, forKey: R.Keys.UserDefaults.selectedTab.rawValue)
     }
     
+    func saveLastSelectedFilterType(_ type: FilterType) {
+        filterType.value = type
+    }
+    
+    func saveLastNetworkState(_ state: NetworkState) {
+        networkState.value = state
+    }
+    
     func getUsers() {
         UsersService().loadUsers { result in
             switch result {
@@ -120,6 +128,10 @@ struct MainViewModel {
             let model = indexPath.section == .zero ? filteredByHappyBirthdayThisYearUsers : filteredByHappyBirthdayNextYearUsers
             return model[indexPath.item]
         }
+    }
+    
+    func getFilterType() -> FilterType {
+        filterType.value
     }
     
     // MARK: - NetworkState

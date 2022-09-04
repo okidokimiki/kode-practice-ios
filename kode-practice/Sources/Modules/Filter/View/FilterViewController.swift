@@ -41,9 +41,9 @@ private extension FilterViewController {
     
     func configureRadioController() {
         guard let viewModel = viewModel else { return }
-        
         radioController.buttonsArray = [selfView.byAlphabetRadioButton, selfView.byBirthdayRadioButton]
-        switch viewModel.filterType.value {
+        
+        switch viewModel.getFilterType() {
         case .byAlphabet:
             radioController.defaultButton = selfView.byAlphabetRadioButton
         case .byBirthday:
@@ -76,13 +76,13 @@ private extension FilterViewController {
 private extension FilterViewController {
     
     func didTapAlphabetRadioButton() {
-        viewModel?.filterType.value = .byAlphabet
+        viewModel?.saveLastSelectedFilterType(.byAlphabet)
         delegate?.didChangeFilter(by: .byAlphabet)
         
     }
     
     func didTapBirthdayRadioButton() {
-        viewModel?.filterType.value = .byBirthday
+        viewModel?.saveLastSelectedFilterType(.byBirthday)
         delegate?.didChangeFilter(by: .byBirthday)
     }
 }

@@ -143,7 +143,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // TODO: Find another solution, because this is a very expensive operation
         let label = UILabel(frame: CGRect.zero)
-        label.text = viewModel.tabs.value[indexPath.item].title
+        label.text = viewModel.getTabTitleForCell(with: indexPath)
         label.sizeToFit()
         
         return CGSize(width: label.frame.width, height: selfView.tabsCollectionView.frame.height)
@@ -186,7 +186,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let userCell = cell as? UserCell else { return }
         
-        switch viewModel.filterType.value {
+        switch viewModel.getFilterType() {
         case .byAlphabet:
             userCell.shouldBirthdayDateHide(true)
         case .byBirthday:
@@ -361,9 +361,9 @@ private extension MainViewController {
     
     func didChangeConnectivityStatus(_ notification: Notification) {
         if NetworkMonitor.shared.isConnected {
-            viewModel.networkState.value = .default
+            viewModel.saveLastNetworkState(.default)
         } else {
-            viewModel.networkState.value = .failed(.noInternet)
+            viewModel.saveLastNetworkState(.failed(.noInternet))
         }
     }
     
