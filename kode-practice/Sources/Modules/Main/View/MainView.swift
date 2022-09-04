@@ -3,13 +3,6 @@ import SnapKit
 
 final class MainView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let tabsHeight: CGFloat = 44
-        static let separatorHeight: CGFloat = 0.4
-    }
-    
     // MARK: - Views
     
     private lazy var separatorView = MainView.makeSeparatorView()
@@ -68,4 +61,11 @@ extension MainView {
         return view
     }
     
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let tabsHeight: CGFloat = 44
+    static let separatorHeight: CGFloat = 0.4
 }

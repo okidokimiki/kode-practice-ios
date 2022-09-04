@@ -16,7 +16,7 @@ struct MainViewModel {
     var tabs: Observable<[TabCollectionViewCellModel]> = Observable([])
     
     var searchState: Observable<SearchState> = Observable(.default)
-    var filteredBy: Observable<FilterType> = Observable(.byAlphabet)
+    var filterType: Observable<FilterType> = Observable(.byAlphabet)
     var networkState: Observable<NetworkState> = Observable(.default)
     
     var users: Observable<[UserTableViewCellModel]> = Observable([])
@@ -55,6 +55,14 @@ struct MainViewModel {
         UserDefaults.standard.set(tabNumber, forKey: R.Keys.UserDefaults.selectedTab.rawValue)
     }
     
+    func saveLastSelectedFilterType(_ type: FilterType) {
+        filterType.value = type
+    }
+    
+    func saveLastNetworkState(_ state: NetworkState) {
+        networkState.value = state
+    }
+    
     func getUsers() {
         UsersService().loadUsers { result in
             switch result {
@@ -89,6 +97,41 @@ struct MainViewModel {
             }
             searchState.value = searchedUsers.value.isEmpty ? .none : .some
         }
+    }
+    
+    func getTabItemsInSection() -> Int {
+        tabs.value.count
+    }
+    
+    func getTabTitleForCell(with indexPath: IndexPath) -> String {
+        tabs.value[indexPath.item].title
+    }
+    
+    func getNumberOfSections() -> Int {
+        filterType.value.rawValue
+    }
+    
+    func getNumberOfRowsInSection(of section: Int) -> Int {
+        switch filterType.value {
+        case .byAlphabet:
+            return filteredByAlphabetUsers.count
+        case .byBirthday:
+            return section == .zero ? filteredByHappyBirthdayThisYearUsers.count : filteredByHappyBirthdayNextYearUsers.count
+        }
+    }
+    
+    func getUserCellModel(with indexPath: IndexPath) -> UserTableViewCellModel {
+        switch filterType.value {
+        case .byAlphabet:
+            return filteredByAlphabetUsers[indexPath.item]
+        case .byBirthday:
+            let model = indexPath.section == .zero ? filteredByHappyBirthdayThisYearUsers : filteredByHappyBirthdayNextYearUsers
+            return model[indexPath.item]
+        }
+    }
+    
+    func getFilterType() -> FilterType {
+        filterType.value
     }
     
     // MARK: - NetworkState

@@ -3,51 +3,6 @@ import SnapKit
 
 final class UserTableViewCell: UITableViewCell {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let gradientColors: [CGColor] = [
-            R.Colors.Gradient.loadingSkeletonStart.cgColor,
-            R.Colors.Gradient.loadingSkeletonEnd.cgColor
-        ]
-        
-        enum AvatarImageView {
-            static let topOrBottomInset: CGFloat = 6
-            static let leftOrRightInset: CGFloat = 16
-            static let height: CGFloat = 72
-            static let frame: CGRect = .init(
-                x: .zero,
-                y: .zero,
-                width: Constants.AvatarImageView.height,
-                height: Constants.AvatarImageView.height
-            )
-        }
-        
-        enum FullNameLabel {
-            static let textFont = R.Fonts.interMedium(with: 16)
-            static let topInset: CGFloat = 25
-            static let height: CGFloat = 16
-            static let width: CGFloat = 144
-        }
-        
-        enum TagLabel {
-            static let textFont = R.Fonts.interMedium(with: 14)
-            static let leftOffset: CGFloat = 4
-        }
-        
-        enum DepartmentLabel {
-            static let textFont = R.Fonts.interRegular(with: 13)
-            static let topOffset: CGFloat = 6
-            static let height: CGFloat = 12
-            static let width: CGFloat = 80
-        }
-        
-        enum BirthdayDateLabel {
-            static let rightInset: CGFloat = 19.5
-            static let textFont = R.Fonts.interRegular(with: 15)
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var skeletonAvatarView = UserTableViewCell.makeSkeletonView(
@@ -65,17 +20,14 @@ final class UserTableViewCell: UITableViewCell {
     
     private lazy var fullNameLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.active,
-        textAlignment: .left,
         font: Constants.FullNameLabel.textFont
     )
     private lazy var tagLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.inActive,
-        textAlignment: .left,
         font: Constants.TagLabel.textFont
     )
     private lazy var departmentLabel = UserTableViewCell.makeLabel(
         textColor: R.Colors.Text.secondary,
-        textAlignment: .left,
         font: Constants.DepartmentLabel.textFont
     )
     private lazy var birthdayDateLabel = UserTableViewCell.makeLabel(
@@ -102,7 +54,7 @@ final class UserTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         avatarImageView.image = nil
     }
-        
+    
     func configure(with model: UserTableViewCellModel) {
         birthdayDateLabel.text = model.shortFormatBirthday
         avatarImageView.loadImage(from: model.logoUrl)
@@ -211,7 +163,7 @@ extension UserTableViewCell {
         return imageView
     }
     
-    static func makeLabel(textColor: UIColor, textAlignment: NSTextAlignment, font: UIFont) -> UILabel {
+    static func makeLabel(textColor: UIColor, textAlignment: NSTextAlignment = .left, font: UIFont) -> UILabel {
         let label = UILabel()
         label.numberOfLines = .zero
         label.layer.masksToBounds = true
@@ -220,5 +172,50 @@ extension UserTableViewCell {
         label.font = font
         
         return label
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let gradientColors: [CGColor] = [
+        R.Colors.Gradient.loadingSkeletonStart.cgColor,
+        R.Colors.Gradient.loadingSkeletonEnd.cgColor
+    ]
+    
+    enum AvatarImageView {
+        static let topOrBottomInset: CGFloat = 6
+        static let leftOrRightInset: CGFloat = 16
+        static let height: CGFloat = 72
+        static let frame: CGRect = .init(
+            x: .zero,
+            y: .zero,
+            width: Constants.AvatarImageView.height,
+            height: Constants.AvatarImageView.height
+        )
+    }
+    
+    enum FullNameLabel {
+        static let textFont = R.Fonts.interMedium(with: 16)
+        static let topInset: CGFloat = 25
+        static let height: CGFloat = 16
+        static let width: CGFloat = 144
+    }
+    
+    enum TagLabel {
+        static let textFont = R.Fonts.interMedium(with: 14)
+        static let leftOffset: CGFloat = 4
+    }
+    
+    enum DepartmentLabel {
+        static let textFont = R.Fonts.interRegular(with: 13)
+        static let topOffset: CGFloat = 6
+        static let height: CGFloat = 12
+        static let width: CGFloat = 80
+    }
+    
+    enum BirthdayDateLabel {
+        static let rightInset: CGFloat = 19.5
+        static let textFont = R.Fonts.interRegular(with: 15)
     }
 }

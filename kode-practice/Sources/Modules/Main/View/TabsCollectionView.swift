@@ -2,12 +2,7 @@ import UIKit
 
 final class TabsCollectionView: UICollectionView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        static let spaceBetweenElements: CGFloat = 8
-    }
+    typealias TabCell = TabCollectionViewCell
     
     // MARK: - UICollectionView
     
@@ -39,6 +34,13 @@ private extension TabsCollectionView {
     }
     
     func registerCells() {
-        register(TabCollectionViewCell.self)
+        register(TabCell.self)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    static let spaceBetweenElements: CGFloat = 8
 }

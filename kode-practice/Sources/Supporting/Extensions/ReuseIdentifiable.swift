@@ -18,15 +18,15 @@ extension UICollectionReusableView: ReuseIdentifiable { }
 
 extension UICollectionView {
     
-    func dequeueCell<T: UICollectionViewCell>(cellType: T.Type, for indexPath: IndexPath) -> T {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
-            fatalError("Can't dequeue \(String(describing: T.self))")
+    func dequeueCell<Cell: UICollectionViewCell>(cellType: Cell.Type, for indexPath: IndexPath) -> Cell {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: Cell.reuseIdentifier, for: indexPath) as? Cell else {
+            fatalError("Can't dequeue \(String(describing: Cell.self))")
         }
         
         return cell
     }
     
-    func register<T: UICollectionViewCell>(_ cellType: T.Type) {
+    func register<Cell: UICollectionViewCell>(_ cellType: Cell.Type) {
         register(cellType, forCellWithReuseIdentifier: cellType.reuseIdentifier)
     }
 }
@@ -39,15 +39,15 @@ extension UITableViewHeaderFooterView: ReuseIdentifiable { }
 
 extension UITableView {
     
-    func dequeueCell<T: UITableViewCell>(cellType: T.Type) -> T {
-        guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier) as? T else {
-            fatalError("Can't dequeue \(String(describing: T.self))")
+    func dequeueCell<Cell: UITableViewCell>(cellType: Cell.Type) -> Cell {
+        guard let cell = dequeueReusableCell(withIdentifier: Cell.reuseIdentifier) as? Cell else {
+            fatalError("Can't dequeue \(String(describing: Cell.self))")
         }
         
         return cell
     }
     
-    func register<T: UITableViewCell>(_ cellType: T.Type) {
+    func register<Cell: UITableViewCell>(_ cellType: Cell.Type) {
         register(cellType, forCellReuseIdentifier: cellType.reuseIdentifier)
     }
 }

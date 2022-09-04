@@ -6,11 +6,7 @@ protocol UserTableViewTouchDelegate {
 
 final class UserTableView: UITableView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: -16)
-    }
+    typealias UserCell = UserTableViewCell
     
     // MARK: - Internal Properties
     
@@ -18,7 +14,7 @@ final class UserTableView: UITableView {
     
     // MARK: - Delegate Properties
     
-     var touchedDelegate: UserTableViewTouchDelegate?
+    var touchedDelegate: UserTableViewTouchDelegate?
     
     // MARK: - UITableView
     
@@ -58,6 +54,12 @@ private extension UserTableView {
     }
     
     func registerCells() {
-        register(UserTableViewCell.self)
+        register(UserCell.self)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: -16)
 }

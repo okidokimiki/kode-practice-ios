@@ -2,27 +2,6 @@ import SnapKit
 
 final class NoSearchResultView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let leftOrRightInset: CGFloat = 16
-        
-        enum ErrorEmojiLabel {
-            static let emojiTextFont: UIFont = .systemFont(ofSize: 60)
-            static let topOffset: CGFloat = 80
-        }
-        
-        enum TitleLabel {
-            static let titleTextFont = R.Fonts.interSemiBold(with: 17)
-            static let topOffset: CGFloat = 8
-        }
-        
-        enum MessageLabel {
-            static let messageTextFont = R.Fonts.interRegular(with: 16)
-            static let topOffset: CGFloat = 12
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var titleLabel = NoSearchResultView.makeLabel(
@@ -86,7 +65,7 @@ extension NoSearchResultView {
         
         return label
     }
-
+    
     static func makeLabel(text: String, font: UIFont, textColor: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
@@ -95,5 +74,26 @@ extension NoSearchResultView {
         label.textAlignment = .center
         
         return label
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let leftOrRightInset: CGFloat = 16
+    
+    enum ErrorEmojiLabel {
+        static let emojiTextFont: UIFont = .systemFont(ofSize: 60)
+        static let topOffset: CGFloat = 80
+    }
+    
+    enum TitleLabel {
+        static let titleTextFont = R.Fonts.interSemiBold(with: 17)
+        static let topOffset: CGFloat = 8
+    }
+    
+    enum MessageLabel {
+        static let messageTextFont = R.Fonts.interRegular(with: 16)
+        static let topOffset: CGFloat = 12
     }
 }

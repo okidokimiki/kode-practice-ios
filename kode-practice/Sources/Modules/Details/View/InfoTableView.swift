@@ -29,7 +29,6 @@ private extension InfoTableView {
     }
     
     func registerCells() {
-        register(DateInfoTableViewCell.self)
-        register(PhoneInfoTableViewCell.self)
+        register(InfoTableViewCell.self)
     }
 }

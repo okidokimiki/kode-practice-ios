@@ -5,15 +5,20 @@ struct DetailsViewModel {
     // MARK: - Internal Properties
     
     let user: UserTableViewCellModel
-    var dateInfo: Observable<DateInfoTableViewCellModel?> = Observable(nil)
-    let phoneInfo: Observable<PhoneInfoTableViewCellModel?> = Observable(nil)
     
     // MARK: - Initilization
     
     init(_ user: UserTableViewCellModel) {
         self.user = user
-        dateInfo.value = .init(birthday: birthday, age: age)
-        phoneInfo.value = .init(phoneNumber: phoneNumber)
+    }
+    
+    // MARK: - Public Methods
+    
+    func getInfoCellModel(with indexPath: IndexPath) -> InfoTableViewCellModel? {
+        .init(cellType: indexPath.item == .zero ? .date : .phone,
+              phoneNumber: phoneNumber,
+              birthday: birthday, age: age
+        )
     }
 }
 
@@ -27,14 +32,14 @@ private extension DetailsViewModel {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.dateFormat = "d MMMM yyyy"
-
+        
         return dateFormatter
             .string(from: birthdayDate)
     }
     
     var age: Int? {
         guard let birthdayDate = user.birthdayDate else { return nil }
-
+        
         return Calendar.current.dateComponents([.year], from: birthdayDate, to: Date()).year ?? nil
     }
     

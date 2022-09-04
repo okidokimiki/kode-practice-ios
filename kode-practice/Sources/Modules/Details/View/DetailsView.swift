@@ -3,34 +3,6 @@ import SnapKit
 
 final class DetailsView: BaseView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        enum AvatarImageView {
-            static let height: CGFloat = 104
-            static let negativeTopOffset: CGFloat = -20
-        }
-        
-        enum FullNameLabel {
-            static let textFont = R.Fonts.interBold(with: 24)
-            static let topOffset: CGFloat = 24
-        }
-        
-        enum TagLabel {
-            static let textFont = R.Fonts.interMedium(with: 17)
-            static let topOffset: CGFloat = 4
-        }
-        
-        enum DepartmentLabel {
-            static let textFont = R.Fonts.interRegular(with: 13)
-            static let topOffset: CGFloat = 12
-        }
-        
-        enum InfoTableView {
-            static let topOffset: CGFloat = 32
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var fullNameLabel = DetailsView.makeLabel(
@@ -121,5 +93,33 @@ extension DetailsView {
         imageView.contentMode = .scaleToFill
         
         return imageView
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    enum AvatarImageView {
+        static let height: CGFloat = 104
+        static let negativeTopOffset: CGFloat = -20
+    }
+    
+    enum FullNameLabel {
+        static let textFont = R.Fonts.interBold(with: 24)
+        static let topOffset: CGFloat = 24
+    }
+    
+    enum TagLabel {
+        static let textFont = R.Fonts.interMedium(with: 17)
+        static let topOffset: CGFloat = 4
+    }
+    
+    enum DepartmentLabel {
+        static let textFont = R.Fonts.interRegular(with: 13)
+        static let topOffset: CGFloat = 12
+    }
+    
+    enum InfoTableView {
+        static let topOffset: CGFloat = 32
     }
 }

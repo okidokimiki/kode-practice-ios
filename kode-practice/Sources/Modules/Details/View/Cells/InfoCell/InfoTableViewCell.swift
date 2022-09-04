@@ -1,39 +1,22 @@
 import UIKit
 import SnapKit
 
-final class DateInfoTableViewCell: UITableViewCell {
-    
-    // MARK: - Constants
-    
-    private enum Constants {
-        enum IconImageView {
-            static let height: CGFloat = 20
-            static let leftOffset: CGFloat = 16
-        }
-        
-        enum DateLabel {
-            static let leftOffset: CGFloat = 14
-        }
-        
-        enum AgeLabelLabel {
-            static let rightInset: CGFloat = 14
-        }
-        
-        enum SeparatorView {
-            static let leftOrRightInset: CGFloat = 14
-            static let height: CGFloat = 0.5
-        }
-    }
+enum InfoCellType: CaseIterable {
+    case date
+    case phone
+}
+
+final class InfoTableViewCell: UITableViewCell {
     
     // MARK: - Views
     
-    private lazy var separator = DateInfoTableViewCell.makeSeparator()
-    private lazy var iconImageView = DateInfoTableViewCell.makeIconImageView(icon: R.Images.Details.start)
-    private lazy var dateLabel = DateInfoTableViewCell.makeLabel(
+    private lazy var separator = InfoTableViewCell.makeSeparator()
+    private lazy var iconImageView = InfoTableViewCell.makeIconImageView()
+    private lazy var contentLabel = InfoTableViewCell.makeLabel(
         textColor: R.Colors.Text.active,
         textAlignment: .left
     )
-    private lazy var ageLabel = DateInfoTableViewCell.makeLabel(
+    private lazy var ageLabel = InfoTableViewCell.makeLabel(
         textColor: R.Colors.Text.inActive,
         textAlignment: .right
     )
@@ -42,36 +25,41 @@ final class DateInfoTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureAppearance()
         configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureAppearance()
         configureUI()
     }
     
     // MARK: - ConfigurePerCell
     
-    func configure(with model: DateInfoTableViewCellModel?) {
+    func configure(with model: InfoTableViewCellModel?) {
         guard let model = model, let age = model.age else { return }
-        let wordAge = Locale.current.languageCode == "ru" ? age.ruWordAge() : "year"
-        dateLabel.text = model.birthday
-        ageLabel.text = String(describing: age) + " " + wordAge
+        
+        switch model.cellType {
+        case .date:
+            // TODO: Next time use `stringdict` for pluralization
+            let wordAge = Locale.current.languageCode == "ru" ? age.ruWordAge() : "year"
+            
+            contentLabel.text = model.birthday
+            ageLabel.text = String(describing: age) + " " + wordAge
+            selectionStyle = .none
+            iconImageView.image = R.Images.Details.start
+        case .phone:
+            contentLabel.text = model.phoneNumber
+            iconImageView.image = R.Images.Details.phone
+        }
     }
 }
 
 // MARK: - Private Methods
 
-private extension DateInfoTableViewCell {
-    
-    func configureAppearance() {
-        selectionStyle = .none
-    }
+private extension InfoTableViewCell {
     
     func configureUI() {
-        [iconImageView, dateLabel, ageLabel, separator].forEach { contentView.addSubview($0) }
+        [iconImageView, contentLabel, ageLabel, separator].forEach { contentView.addSubview($0) }
         
         iconImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -79,13 +67,13 @@ private extension DateInfoTableViewCell {
             make.height.width.equalTo(Constants.IconImageView.height)
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.left.equalTo(iconImageView.snp.right).offset(Constants.DateLabel.leftOffset)
+        contentLabel.snp.makeConstraints { make in
+            make.left.equalTo(iconImageView.snp.right).offset(Constants.Labels.leftOrRightOffset)
             make.centerY.equalTo(iconImageView.snp.centerY)
         }
         
         ageLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(Constants.AgeLabelLabel.rightInset)
+            make.right.equalToSuperview().inset(Constants.Labels.leftOrRightOffset)
             make.centerY.equalTo(iconImageView.snp.centerY)
         }
         
@@ -99,12 +87,11 @@ private extension DateInfoTableViewCell {
 
 // MARK: - Creating Subviews
 
-extension DateInfoTableViewCell {
+extension InfoTableViewCell {
     
-    static func makeIconImageView(icon: UIImage?) -> UIImageView {
+    static func makeIconImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
-        imageView.image = icon
         
         return imageView
     }
@@ -113,7 +100,7 @@ extension DateInfoTableViewCell {
         let label = UILabel()
         label.textColor = textColor
         label.textAlignment = textAlignment
-        label.font = R.Fonts.interMedium(with: 16)
+        label.font = Constants.Labels.textFont
         
         return label
     }
@@ -123,5 +110,24 @@ extension DateInfoTableViewCell {
         view.backgroundColor = R.Colors.detailsBackground
         
         return view
+    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    enum IconImageView {
+        static let height: CGFloat = 20
+        static let leftOffset: CGFloat = 16
+    }
+    
+    enum Labels {
+        static let textFont = R.Fonts.interMedium(with: 16)
+        static let leftOrRightOffset: CGFloat = 14
+    }
+    
+    enum SeparatorView {
+        static let leftOrRightInset: CGFloat = 14
+        static let height: CGFloat = 0.5
     }
 }

@@ -3,14 +3,8 @@ import SnapKit
 
 final class MainViewController: BaseViewController<MainView> {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let skeletonTableViewCellCount: Int = 12
-        static let rowCellHeight: CGFloat = 84
-        static let headerViewHeight: CGFloat = 68
-        static let noInternetInitialHeight: CGFloat = 0
-    }
+    typealias TabCell = TabCollectionViewCell
+    typealias UserCell = UserTableViewCell
     
     // MARK: - Views
     
@@ -19,33 +13,40 @@ final class MainViewController: BaseViewController<MainView> {
     
     // MARK: - Gestures
     
-    private lazy var noInternetTapGesture = UITapGestureRecognizer(target: self, action: #selector(noInternerViewDidTap))
+    private lazy var hideNoInternetOnTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapNoInternerView))
     
     // MARK: - Internal Properties
     
-    private var viewModel: MainViewModel?
+    private var viewModel: MainViewModel
     
     // MARK: - Initilization
     
-    convenience init(viewModel: MainViewModel) {
-        self.init(nibName: nil, bundle: nil)
+    init(viewModel: MainViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        subscribeToNotifications()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        unsubscribeFromAllNotifications()
     }
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        binding()
         setupTargets()
-        setupBindings()
         setupDelegates()
         setupNoInternetView()
         setupGestureRecognizerDelegates()
         
-        subscribeToNotifications()
-        
-        viewModel?.getTabs()
-        viewModel?.getUsers()
+        viewModel.getTabs()
+        viewModel.getUsers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +60,7 @@ final class MainViewController: BaseViewController<MainView> {
 extension MainViewController: UIGestureRecognizerDelegate {
     
     func setupGestureRecognizerDelegates() {
-        noInternetTapGesture.delegate = self
+        hideNoInternetOnTapGesture.delegate = self
     }
 }
 
@@ -67,8 +68,8 @@ extension MainViewController: UIGestureRecognizerDelegate {
 
 extension MainViewController: FilterDelegate {
     
-    func sortDidChange(by filter: FilterType) {
-        viewModel?.filteredBy.value = filter
+    func didChangeFilter(by filter: FilterType) {
+        viewModel.filterType.value = filter
         
         selfView.userTableView.reloadData()
         selfView.searchBar.text = ""
@@ -87,9 +88,9 @@ extension MainViewController: FilterDelegate {
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel?.getSearchedUsers(by: searchText)
+        viewModel.getSearchedUsers(by: searchText)
     }
-        
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
@@ -104,8 +105,7 @@ extension MainViewController: UISearchBarDelegate {
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        guard let viewModel = viewModel else { return }
-        filterViewController.viewModel = .init(selectedFiltered: viewModel.filteredBy)
+        filterViewController.viewModel = .init(filterType: viewModel.filterType)
         present(filterViewController, animated: true)
     }
 }
@@ -115,8 +115,8 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel?.saveLastUsedTab(indexPath.item)
-        viewModel?.getDepartmentUsers(of: Department.allCases[indexPath.item])
+        viewModel.saveLastUsedTab(indexPath.item)
+        viewModel.getDepartmentUsers(of: Department.allCases[indexPath.item])
     }
 }
 
@@ -125,16 +125,12 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return .zero }
-        
-        return viewModel.tabs.value.count
+        viewModel.getTabItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tabCell = collectionView.dequeueCell(cellType: TabCollectionViewCell.self, for: indexPath)
-        guard let viewModel = viewModel else { return tabCell }
-        
-        tabCell.configure(with: viewModel.tabs.value[indexPath.item].title)
+        let tabCell = collectionView.dequeueCell(cellType: TabCell.self, for: indexPath)
+        tabCell.configure(with: viewModel.getTabTitleForCell(with: indexPath))
         
         return tabCell
     }
@@ -147,7 +143,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // TODO: Find another solution, because this is a very expensive operation
         let label = UILabel(frame: CGRect.zero)
-        label.text = viewModel?.tabs.value[indexPath.item].title
+        label.text = viewModel.getTabTitleForCell(with: indexPath)
         label.sizeToFit()
         
         return CGSize(width: label.frame.width, height: selfView.tabsCollectionView.frame.height)
@@ -168,21 +164,10 @@ extension MainViewController: UserTableViewTouchDelegate {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return }
+        guard !viewModel.users.value.isEmpty else { return }
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let detailsViewModel: DetailsViewModel
-        switch viewModel.filteredBy.value {
-        case .byAlphabet:
-            detailsViewModel = .init(viewModel.filteredByAlphabetUsers[indexPath.item])
-        case .byBirthday:
-            if indexPath.section == .zero {
-                detailsViewModel = .init(viewModel.filteredByHappyBirthdayThisYearUsers[indexPath.item])
-            } else {
-                detailsViewModel = .init(viewModel.filteredByHappyBirthdayNextYearUsers[indexPath.item])
-            }
-        }
-        
+        let detailsViewModel = DetailsViewModel.init(viewModel.getUserCellModel(with: indexPath))
         navigationController?.pushViewController(DetailsViewController(viewModel: detailsViewModel), animated: true)
     }
     
@@ -199,9 +184,9 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel, let userCell = cell as? UserTableViewCell else { return }
+        guard let userCell = cell as? UserCell else { return }
         
-        switch viewModel.filteredBy.value {
+        switch viewModel.getFilterType() {
         case .byAlphabet:
             userCell.shouldBirthdayDateHide(true)
         case .byBirthday:
@@ -215,41 +200,23 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let viewModel = viewModel else { return .zero }
-        
-        switch viewModel.filteredBy.value {
-        case .byAlphabet:
-            return .one
-        case .byBirthday:
-            return .two
-        }
+        viewModel.getNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else {
+        guard !viewModel.users.value.isEmpty else {
             return Constants.skeletonTableViewCellCount
         }
         
-        switch viewModel.filteredBy.value {
-        case .byAlphabet:
-            return viewModel.filteredByAlphabetUsers.count
-        case .byBirthday:
-            return section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers.count : viewModel.filteredByHappyBirthdayNextYearUsers.count
-        }
+        return viewModel.getNumberOfRowsInSection(of: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let userCell = tableView.dequeueCell(cellType: UserTableViewCell.self)
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
+        let userCell = tableView.dequeueCell(cellType: UserCell.self)
+        guard !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
-        switch viewModel.filteredBy.value {
-        case .byAlphabet:
-            userCell.configure(with: viewModel.filteredByAlphabetUsers[indexPath.item])
-        case .byBirthday:
-            let models = indexPath.section == .zero ? viewModel.filteredByHappyBirthdayThisYearUsers : viewModel.filteredByHappyBirthdayNextYearUsers
-            userCell.configure(with: models[indexPath.item])
-        }
+        userCell.configure(with: viewModel.getUserCellModel(with: indexPath))
         
         return userCell
     }
@@ -264,8 +231,8 @@ private extension MainViewController {
     }
     
     func setupTargets() {
-        selfView.refreshControl.addTarget(self, action: #selector(refreshControlDidScroll), for: .valueChanged)
-        selfView.searchBar.searchTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        selfView.refreshControl.addTarget(self, action: #selector(didScrollRefreshControl), for: .valueChanged)
+        selfView.searchBar.searchTextField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
     }
     
     func setupDelegates() {
@@ -280,7 +247,7 @@ private extension MainViewController {
     }
     
     func setupNoInternetView() {
-        noInternetView.addGestureRecognizer(noInternetTapGesture)
+        noInternetView.addGestureRecognizer(hideNoInternetOnTapGesture)
         
         navigationController?.view.addSubview(noInternetView)
         noInternetView.snp.makeConstraints { make in
@@ -290,34 +257,33 @@ private extension MainViewController {
     }
     
     func setupSelectedTab() {
-        guard let viewModel = viewModel else { return }
         let indexPath = IndexPath(item: viewModel.selectedTabNumber, section: .zero)
         
         selfView.tabsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
-    func setupBindings() {
-        viewModel?.users.observe { _ in
+    func binding() {
+        viewModel.users.observe { _ in
             DispatchQueue.main.async {
-                self.viewModel?.getDepartmentUsers(of: Department.allCases[self.viewModel?.selectedTabNumber ?? .zero])
+                self.viewModel.getDepartmentUsers(of: Department.allCases[self.viewModel.selectedTabNumber])
             }
         }
         
-        viewModel?.departmentUsers.observe { [weak self] _ in
+        viewModel.departmentUsers.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.refreshControl.endRefreshing()
-                self?.viewModel?.getSearchedUsers()
+                self?.viewModel.getSearchedUsers()
                 self?.setupSelectedTab()
             }
         }
         
-        viewModel?.searchedUsers.observe { [weak self] _ in
+        viewModel.searchedUsers.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.userTableView.reloadData()
             }
         }
         
-        viewModel?.searchState.observe { [weak self] state in
+        viewModel.searchState.observe { [weak self] state in
             DispatchQueue.main.async {
                 if case .none = state {
                     self?.selfView.noSearchResultView.shouldHideView(false)
@@ -327,13 +293,13 @@ private extension MainViewController {
             }
         }
         
-        viewModel?.networkState.observe { [weak self] state in
+        viewModel.networkState.observe { [weak self] state in
             DispatchQueue.main.async {
                 if case let .failed(failureReason) = state {
                     switch failureReason {
                     case .internalServerError(let internalError):
                         print("!__: ", internalError)
-                        self?.issueInternalErrorAlert { self?.viewModel?.getUsers() }
+                        self?.issueInternalErrorAlert { self?.viewModel.getUsers() }
                         print(internalError)
                     case .noInternet:
                         self?.shouldNoInternetViewBePresented(true)
@@ -344,20 +310,13 @@ private extension MainViewController {
     }
     
     func shouldNoInternetViewBePresented(_ shouldPresenet: Bool) {
-        var topBarHeight: CGFloat {
-            var top = self.navigationController?.navigationBar.frame.height ?? .zero
-            top += UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? .zero
-            
-            return top
-        }
+        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? navigationBarbarContentStart : .zero) }
         
-        noInternetView.snp.updateConstraints { $0.height.equalTo(shouldPresenet ? topBarHeight : .zero) }
-        
-        noInternetView.setNeedsUpdateConstraints()
+        noInternetView.setNeedsUpdateConstraints()        
         UIView.animate(withDuration: 0.5) { self.noInternetView.layoutIfNeeded() } completion: { done in
             if done {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    guard self.noInternetView.frame.height != topBarHeight else {
+                    guard self.noInternetView.frame.height != self.navigationBarbarContentStart else {
                         self.shouldNoInternetViewBePresented(false)
                         return
                     }
@@ -375,10 +334,14 @@ private extension MainViewController {
     func subscribeToNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(connectivityStatusChanged),
+            selector: #selector(didChangeConnectivityStatus),
             name: NSNotification.Name.connectivityStatus,
             object: nil
         )
+    }
+    
+    func unsubscribeFromAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
 
@@ -387,24 +350,33 @@ private extension MainViewController {
 @objc
 private extension MainViewController {
     
-    func textChanged(_ sender: UITextField) {
+    func didChangeText(_ sender: UITextField) {
         let image = sender.text?.count == .zero ? R.Images.SearchBar.leftImageNormal : R.Images.SearchBar.leftImageSelected
         sender.leftView = UIImageView.init(image: image)
     }
     
-    func refreshControlDidScroll(_ refreshControl: UIRefreshControl) {
-        viewModel?.getUsers()
+    func didScrollRefreshControl(_ refreshControl: UIRefreshControl) {
+        viewModel.getUsers()
     }
     
-    func connectivityStatusChanged(_ notification: Notification) {
+    func didChangeConnectivityStatus(_ notification: Notification) {
         if NetworkMonitor.shared.isConnected {
-            viewModel?.networkState.value = .default
+            viewModel.saveLastNetworkState(.default)
         } else {
-            viewModel?.networkState.value = .failed(.noInternet)
+            viewModel.saveLastNetworkState(.failed(.noInternet))
         }
     }
     
-    func noInternerViewDidTap(_ sender: UITapGestureRecognizer) {
+    func didTapNoInternerView(_ sender: UITapGestureRecognizer) {
         shouldNoInternetViewBePresented(false)
     }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let skeletonTableViewCellCount: Int = 12
+    static let rowCellHeight: CGFloat = 84
+    static let headerViewHeight: CGFloat = 68
+    static let noInternetInitialHeight: CGFloat = 0
 }

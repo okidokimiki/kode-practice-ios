@@ -14,7 +14,7 @@ extension UIImage {
     ///
     /// - Returns: A rendered `UIImage` that is convenient to use for the `UISearchTextField` background.
     static func image(color: UIColor = .clear, size: CGSize = CGSize(width: 1, height: 40)) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+        UIGraphicsImageRenderer(size: size).image { rendererContext in
             color.setFill()
             rendererContext.fill(CGRect(origin: .zero, size: size))
         }

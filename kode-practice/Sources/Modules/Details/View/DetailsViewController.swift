@@ -2,11 +2,7 @@ import UIKit
 
 final class DetailsViewController: BaseViewController<DetailsView> {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let rowCellHeight: CGFloat = 60
-    }
+    typealias InfoCell = InfoTableViewCell
     
     // MARK: - Views
     
@@ -14,18 +10,21 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     
     // MARK: - Internal Properties
     
-    private var viewModel: DetailsViewModel?
+    private var viewModel: DetailsViewModel
     
     // MARK: - Initilization
     
-    convenience init(viewModel: DetailsViewModel) {
-        self.init(nibName: nil, bundle: nil)
+    init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
-        self.selfView.configure(with: viewModel.user)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        self.swipeToPop(enable: false)
+        swipeToPop(enable: false)
     }
     
     // MARK: - Lifecycle
@@ -33,9 +32,8 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
-        setupBindings()
         
-        selfView.configure(with: viewModel?.user)
+        selfView.configure(with: viewModel.user)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +43,7 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.swipeToPop(enable: true)
+        swipeToPop(enable: true)
     }
 }
 
@@ -71,7 +69,7 @@ extension DetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if case .one = indexPath.item {
-            callNumber(phoneNumber: viewModel?.user.phone)
+            callNumber(phoneNumber: viewModel.user.phone)
         }
     }
     
@@ -84,23 +82,15 @@ extension DetailsViewController: UITableViewDelegate {
 
 extension DetailsViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { .two }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        InfoCellType.allCases.count
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let noneCell = UITableViewCell(style: .default, reuseIdentifier: String(describing: UITableViewCell.self))
-        let dateCell = tableView.dequeueCell(cellType: DateInfoTableViewCell.self)
-        let phoneCell = tableView.dequeueCell(cellType: PhoneInfoTableViewCell.self)
-        guard let viewModel = viewModel else { return noneCell }
+        let infoCell = tableView.dequeueCell(cellType: InfoCell.self)
+        infoCell.configure(with: viewModel.getInfoCellModel(with: indexPath))
         
-        switch indexPath.item {
-        case .zero:
-            dateCell.configure(with: viewModel.dateInfo.value)
-            return dateCell
-        case .one:
-            phoneCell.configure(with: viewModel.phoneInfo.value)
-            return phoneCell
-        default: return noneCell
-        }
+        return infoCell
     }
 }
 
@@ -123,20 +113,10 @@ private extension DetailsViewController {
               UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
-    func setupBindings() {
-        guard let viewModel = viewModel else { return }
-        
-        viewModel.dateInfo.observe { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.selfView.infoTableView.reloadRows(at: [IndexPath(item: .one, section: .zero)], with: .none)
-            }
-        }
-        
-        viewModel.phoneInfo.observe { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.selfView.infoTableView.reloadRows(at: [IndexPath(item: .two, section: .zero)], with: .none)
-            }
-        }
-    }
+}
+
+// MARK: - Constants
+
+private enum Constants {
+    static let rowCellHeight: CGFloat = 60
 }
