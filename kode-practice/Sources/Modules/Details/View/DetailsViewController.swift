@@ -8,14 +8,17 @@ final class DetailsViewController: BaseViewController<DetailsView> {
     
     // MARK: - Internal Properties
     
-    private var viewModel: DetailsViewModel?
+    private var viewModel: DetailsViewModel
     
     // MARK: - Initilization
     
-    convenience init(viewModel: DetailsViewModel) {
-        self.init(nibName: nil, bundle: nil)
+    init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
-        self.selfView.configure(with: viewModel.user)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -28,7 +31,7 @@ final class DetailsViewController: BaseViewController<DetailsView> {
         super.viewDidLoad()
         setupDelegates()
         
-        selfView.configure(with: viewModel?.user)
+        selfView.configure(with: viewModel.user)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +67,7 @@ extension DetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if case .one = indexPath.item {
-            callNumber(phoneNumber: viewModel?.user.phone)
+            callNumber(phoneNumber: viewModel.user.phone)
         }
     }
     
@@ -83,7 +86,6 @@ extension DetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let infoCell = tableView.dequeueCell(cellType: InfoTableViewCell.self)
-        guard let viewModel = viewModel else { return infoCell }
         
         infoCell.configure(with: viewModel.getInfoCellModel(with: indexPath))
         

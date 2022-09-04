@@ -14,14 +14,18 @@ final class MainViewController: BaseViewController<MainView> {
     
     // MARK: - Internal Properties
     
-    private var viewModel: MainViewModel?
+    private var viewModel: MainViewModel
     
     // MARK: - Initilization
     
-    convenience init(viewModel: MainViewModel) {
-        self.init(nibName: nil, bundle: nil)
+    init(viewModel: MainViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
         subscribeToNotifications()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -38,8 +42,8 @@ final class MainViewController: BaseViewController<MainView> {
         setupNoInternetView()
         setupGestureRecognizerDelegates()
         
-        viewModel?.getTabs()
-        viewModel?.getUsers()
+        viewModel.getTabs()
+        viewModel.getUsers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +66,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
 extension MainViewController: FilterDelegate {
     
     func didChangeFilter(by filter: FilterType) {
-        viewModel?.filterType.value = filter
+        viewModel.filterType.value = filter
         
         selfView.userTableView.reloadData()
         selfView.searchBar.text = ""
@@ -81,7 +85,7 @@ extension MainViewController: FilterDelegate {
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel?.getSearchedUsers(by: searchText)
+        viewModel.getSearchedUsers(by: searchText)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -98,7 +102,6 @@ extension MainViewController: UISearchBarDelegate {
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        guard let viewModel = viewModel else { return }
         filterViewController.viewModel = .init(filterType: viewModel.filterType)
         present(filterViewController, animated: true)
     }
@@ -109,8 +112,8 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel?.saveLastUsedTab(indexPath.item)
-        viewModel?.getDepartmentUsers(of: Department.allCases[indexPath.item])
+        viewModel.saveLastUsedTab(indexPath.item)
+        viewModel.getDepartmentUsers(of: Department.allCases[indexPath.item])
     }
 }
 
@@ -119,14 +122,11 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return .zero }
-        
-        return viewModel.getTabItemsInSection()
+        viewModel.getTabItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tabCell = collectionView.dequeueCell(cellType: TabCollectionViewCell.self, for: indexPath)
-        guard let viewModel = viewModel else { return tabCell }
         
         tabCell.configure(with: viewModel.getTabTitleForCell(with: indexPath))
         
@@ -141,7 +141,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // TODO: Find another solution, because this is a very expensive operation
         let label = UILabel(frame: CGRect.zero)
-        label.text = viewModel?.tabs.value[indexPath.item].title
+        label.text = viewModel.tabs.value[indexPath.item].title
         label.sizeToFit()
         
         return CGSize(width: label.frame.width, height: selfView.tabsCollectionView.frame.height)
@@ -162,7 +162,7 @@ extension MainViewController: UserTableViewTouchDelegate {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return }
+        guard !viewModel.users.value.isEmpty else { return }
         tableView.deselectRow(at: indexPath, animated: true)
         
         let detailsViewModel = DetailsViewModel.init(viewModel.getUserCellModel(with: indexPath))
@@ -182,7 +182,7 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel, let userCell = cell as? UserTableViewCell else { return }
+        guard let userCell = cell as? UserTableViewCell else { return }
         
         switch viewModel.filterType.value {
         case .byAlphabet:
@@ -198,13 +198,11 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let viewModel = viewModel else { return .zero }
-        
-        return viewModel.getNumberOfSections()
+        viewModel.getNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else {
+        guard !viewModel.users.value.isEmpty else {
             return Constants.skeletonTableViewCellCount
         }
         
@@ -213,7 +211,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let userCell = tableView.dequeueCell(cellType: UserTableViewCell.self)
-        guard let viewModel = viewModel, !viewModel.users.value.isEmpty else { return userCell }
+        guard !viewModel.users.value.isEmpty else { return userCell }
         
         userCell.shouldSkeletonViewsHide(true)
         userCell.configure(with: viewModel.getUserCellModel(with: indexPath))
@@ -257,34 +255,33 @@ private extension MainViewController {
     }
     
     func setupSelectedTab() {
-        guard let viewModel = viewModel else { return }
         let indexPath = IndexPath(item: viewModel.selectedTabNumber, section: .zero)
         
         selfView.tabsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     func binding() {
-        viewModel?.users.observe { _ in
+        viewModel.users.observe { _ in
             DispatchQueue.main.async {
-                self.viewModel?.getDepartmentUsers(of: Department.allCases[self.viewModel?.selectedTabNumber ?? .zero])
+                self.viewModel.getDepartmentUsers(of: Department.allCases[self.viewModel.selectedTabNumber])
             }
         }
         
-        viewModel?.departmentUsers.observe { [weak self] _ in
+        viewModel.departmentUsers.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.refreshControl.endRefreshing()
-                self?.viewModel?.getSearchedUsers()
+                self?.viewModel.getSearchedUsers()
                 self?.setupSelectedTab()
             }
         }
         
-        viewModel?.searchedUsers.observe { [weak self] _ in
+        viewModel.searchedUsers.observe { [weak self] _ in
             DispatchQueue.main.async {
                 self?.selfView.userTableView.reloadData()
             }
         }
         
-        viewModel?.searchState.observe { [weak self] state in
+        viewModel.searchState.observe { [weak self] state in
             DispatchQueue.main.async {
                 if case .none = state {
                     self?.selfView.noSearchResultView.shouldHideView(false)
@@ -294,13 +291,13 @@ private extension MainViewController {
             }
         }
         
-        viewModel?.networkState.observe { [weak self] state in
+        viewModel.networkState.observe { [weak self] state in
             DispatchQueue.main.async {
                 if case let .failed(failureReason) = state {
                     switch failureReason {
                     case .internalServerError(let internalError):
                         print("!__: ", internalError)
-                        self?.issueInternalErrorAlert { self?.viewModel?.getUsers() }
+                        self?.issueInternalErrorAlert { self?.viewModel.getUsers() }
                         print(internalError)
                     case .noInternet:
                         self?.shouldNoInternetViewBePresented(true)
@@ -357,14 +354,14 @@ private extension MainViewController {
     }
     
     func didScrollRefreshControl(_ refreshControl: UIRefreshControl) {
-        viewModel?.getUsers()
+        viewModel.getUsers()
     }
     
     func didChangeConnectivityStatus(_ notification: Notification) {
         if NetworkMonitor.shared.isConnected {
-            viewModel?.networkState.value = .default
+            viewModel.networkState.value = .default
         } else {
-            viewModel?.networkState.value = .failed(.noInternet)
+            viewModel.networkState.value = .failed(.noInternet)
         }
     }
     
